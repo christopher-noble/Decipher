@@ -16,8 +16,8 @@ const loadingStyle: any = {
 const awsCreds = {
     region: 'us-west-2',
     credentials: {
-        accessKeyId: 'AKIAU4C2I43TLNTBLOEI',
-        secretAccessKey: '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',
+        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY!,
     }
 }
 
