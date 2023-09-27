@@ -6,12 +6,9 @@ import './css/uploadForm.css'
 import { useState } from 'react';
 import { StartTranscriptionJobCommand, GetTranscriptionJobCommand, TranscribeClient } from "@aws-sdk/client-transcribe";
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { Dna, ProgressBar } from 'react-loader-spinner';
+import { ProgressBar } from 'react-loader-spinner';
+import KeywordTags from './keywordTags';
 const { v4: uuidv4 } = require('uuid');
-
-const loadingStyle: any = {
-    color: 'green'
-}
 
 const awsCreds = {
     region: 'us-west-2',
@@ -44,36 +41,39 @@ function UploadForm() {
         OutputBucketName: s3BucketName
     };
 
-    const uploadFileToS3 = async () => {
-        setIsLoading(true);
-        const command = new PutObjectCommand({
-            Bucket: s3BucketName,
-            Key: s3FileName,
-            Body: s3FileBody,
-        });
-
-        try {
-            const response = await s3Client.send(command);
-            console.log("S3 upload response: ", response);
-        } catch (err) {
-            console.error("error when uploading to S3 bitch: ", err);
-        }
-    }
-
     const startTranscriptionJob = async (event: any) => {
-        uploadFileToS3();
-        setTimeout(async () => {
-            console.log("delayed for 3 seconds")
+        if (s3FileName != '' && s3FileName != null) {
+            setIsLoading(true);
+            const command = new PutObjectCommand({
+                Bucket: s3BucketName,
+                Key: s3FileName,
+                Body: s3FileBody,
+            });
+
             try {
-                const data = await transcribeClient.send(
-                    new StartTranscriptionJobCommand(params)
-                );
-                console.log("StartTranscriptionJobCommand success - put", data);
-                getTranscriptionDetails();
+                const response = await s3Client.send(command);
+                console.log("S3 upload response: ", response);
             } catch (err) {
-                console.log("Error", err);
+                console.error("error when uploading to S3 bitch: ", err);
             }
-        }, 3000);
+
+            setTimeout(async () => {
+                console.log("delayed for 3 seconds")
+                try {
+                    const data = await transcribeClient.send(
+                        new StartTranscriptionJobCommand(params)
+                    );
+                    console.log("StartTranscriptionJobCommand success - put", data);
+                    getTranscriptionDetails();
+                } catch (err) {
+                    console.log("Error", err);
+                }
+            }, 3000);
+        }
+        else {
+            setIsLoading(false);
+            alert("No file included");
+        }
     };
 
     const fetchURLData = async () => {
@@ -103,7 +103,8 @@ function UploadForm() {
                 setTranscriptionComplete(true);
                 fetchURLData();
             } else if (status === "FAILED") {
-                console.log("Failed:", data.TranscriptionJob?.FailureReason);
+                setIsLoading(false);
+                alert('Transcription Failed: ' + data.TranscriptionJob?.FailureReason);
             } else {
                 console.log("In Progress...");
                 setIsLoading(true);
@@ -126,13 +127,16 @@ function UploadForm() {
     return (
         <>
             <Row>
+                <KeywordTags />
+            </Row>
+            <Row>
                 <Col>
                     <Form.Group controlId="formFile" className="mb-2" onChange={setFile}>
                         <Form.Control type="file" />
                     </Form.Group>
                 </Col>
                 <Col xs='auto'>
-                    <Button type="submit" className="mb-2" onClick={startTranscriptionJob}>
+                    <Button type="submit" className="btn btn-outline-dark btn-light" onClick={startTranscriptionJob}>
                         Submit
                     </Button>
                 </Col>

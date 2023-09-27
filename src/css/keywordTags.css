@@ -1,0 +1,30 @@
+.tag-area {
+    margin: 10px;
+    font-size: x-large;
+    vertical-align: center;
+    background-color: transparent;
+    justify-content: baseline;
+}
+
+.tag-element {
+    width: auto;
+    height: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: center;
+    font-size: x-large;
+    font-weight: 300;
+    background-color: #212529 !important;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.tag-element button {
+    width: auto;
+    font-weight: 300;
+}
+
+.delete-button-area {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
