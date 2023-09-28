@@ -4,31 +4,33 @@ import { useState } from "react";
 import './css/keywordTags.css'
 
 
-const KeywordTags = () => {
-  const [state, setState] = useState<any | null>('');
+const KeywordTags = (props: any) => {
+  // const [tags, setTags] = useState<any | null>('');
   return (
     <div>
       <br />
       <div className="input-group">
         <div className="input-area">
           <InputTags
-            values={state}
-            onTags={(value) => setState(value.values)}
+            values={props.tags}
+            onTags={(value) => props.setTags(value.values)}
             className="tag-area"
             elementClassName="tag-element"
           />
         </div>
         <div className="delete-button-area">
+          <hr/>
           <button
-            className="btn btn-outline-dark"
+            className="btn btn-outline-dark delete-button"
             type="button"
             data-testid="button-clearAll"
             onClick={() => {
-              setState([]);
+              props.setTags([]);
             }}
           >
             Delete all
           </button>
+          <hr/>
         </div>
       </div>
     </div>

@@ -6,9 +6,24 @@ import './css/uploadForm.css'
 import { useState } from 'react';
 import { StartTranscriptionJobCommand, GetTranscriptionJobCommand, TranscribeClient } from "@aws-sdk/client-transcribe";
 import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { ProgressBar } from 'react-loader-spinner';
+import ProgressBar from './progressBar';
 import KeywordTags from './keywordTags';
 const { v4: uuidv4 } = require('uuid');
+
+const rawCharacters = (string: string) => {
+    return string.replaceAll(/[^a-zA-z]/g, "").toLowerCase();
+}
+
+const formatTimestamp = (num: string) => {
+    let result: string = '';
+    if (num.indexOf('.') === 1) {
+        result = num.replaceAll("[^0-9]", "").substring(0, 1);
+    }
+    else {
+        result = num.replaceAll("[^0-9]", "").substring(0, 2);
+    }
+    return result;
+}
 
 const awsCreds = {
     region: 'us-west-2',
@@ -19,12 +34,14 @@ const awsCreds = {
 }
 
 function UploadForm() {
-    const [data, setData] = useState<any | null>('');
+    const [fullTranscript, setFullTranscript] = useState<any | null>('');
     const [s3FileBody, setS3FileBody] = useState<any | null>('');
     const [s3FileName, setS3FileName] = useState<any | null>('');
-    const [jobName, setJobName] = useState<any | null>(s3FileName + uuidv4());
+    const [jobName] = useState<any | null>(s3FileName + uuidv4());
     const [isLoading, setIsLoading] = useState<any | null>(false);
     const [transcriptionComplete, setTranscriptionComplete] = useState<any | null>(false);
+    const [transcriptTimestampMap, setTranscriptTimestampMap] = useState<any | null>([]);
+    const [tags, setTags] = useState<any | null>('');
 
     const s3BucketName = 'decipher-audio-files';
 
@@ -42,7 +59,7 @@ function UploadForm() {
     };
 
     const startTranscriptionJob = async (event: any) => {
-        if (s3FileName != '' && s3FileName != null) {
+        if (s3FileName !== '' && s3FileName !== null && transcriptTimestampMap.length < 1) {
             setIsLoading(true);
             const command = new PutObjectCommand({
                 Bucket: s3BucketName,
@@ -72,7 +89,7 @@ function UploadForm() {
         }
         else {
             setIsLoading(false);
-            alert("No file included");
+            alert("Please upload a file");
         }
     };
 
@@ -87,7 +104,12 @@ function UploadForm() {
             const result = await response.Body?.transformToString();
             if (result) {
                 const jsonOutput = await JSON.parse(result);
-                setData(jsonOutput.results.transcripts[0].transcript);
+                let keywordTimestamp: any = [];
+                setFullTranscript(jsonOutput.results.transcripts[0].transcript);
+                jsonOutput.results.items.forEach((item: any) => {
+                    keywordTimestamp.push({ 'keyword': item.alternatives[0].content, 'timestamp': item.start_time })
+                })
+                setTranscriptTimestampMap(keywordTimestamp);
             }
         } catch (err) {
             console.error(err);
@@ -115,9 +137,19 @@ function UploadForm() {
         }
     };
 
-    const handleChange = (event: any) => {
-        setData(event.target.value);
-    };
+    const displayKeywordTimestampMatch = () => {
+        let result: any[] = [];
+
+        tags.forEach((tag: string) => {
+            transcriptTimestampMap.forEach((item: string | any) => {
+                if (rawCharacters(tag) === rawCharacters(item.keyword) && item.timestamp) {
+                    result.push(item.keyword + ' ... ' + formatTimestamp(item.timestamp) + 's')
+                }
+            })
+        })
+
+        return result.join('\n');
+    }
 
     const setFile = (event: any) => {
         setS3FileBody(event.target.files[0]);
@@ -127,7 +159,10 @@ function UploadForm() {
     return (
         <>
             <Row>
-                <KeywordTags />
+                <KeywordTags
+                    tags={tags}
+                    setTags={setTags}
+                />
             </Row>
             <Row>
                 <Col>
@@ -136,7 +171,7 @@ function UploadForm() {
                     </Form.Group>
                 </Col>
                 <Col xs='auto'>
-                    <Button type="submit" className="btn btn-outline-dark btn-light" onClick={startTranscriptionJob}>
+                    <Button type="submit" className="btn btn-dark" onClick={startTranscriptionJob}>
                         Submit
                     </Button>
                 </Col>
@@ -145,23 +180,28 @@ function UploadForm() {
                 {
                     isLoading ?
                         <ProgressBar
-                            height="100"
-                            width="300"
                             ariaLabel="progress-bar-loading"
-                            wrapperStyle={{ width: '100%' }}
+                            wrapperStyle={{ margin: 'auto', width: '500%' }}
                             wrapperClass="progress-bar-wrapper"
-                            borderColor='#2381de'
-                            barColor='#036bfc'
+                            borderColor='#212529'
+                            barColor='#424649'
                         />
                         : ''
                 }
                 {
                     transcriptionComplete ?
-                        <Col>
-                            <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" rows={10} onChange={handleChange} value={data}></Form.Control>
-                            </Form.Group>
-                        </Col>
+                        <Row className='transcriptionRow'>
+                            <Col>
+                                <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea1">
+                                    <Form.Control as="textarea" rows={10} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea2">
+                                    <Form.Control as="textarea" rows={10} onChange={(e) => setTranscriptTimestampMap(e.target.value)} value={displayKeywordTimestampMatch()}></Form.Control>
+                                </Form.Group>
+                            </Col>
+                        </Row>
                         : ''
                 }
             </Row>
