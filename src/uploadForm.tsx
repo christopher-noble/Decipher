@@ -25,23 +25,16 @@ function UploadForm() {
 
     const s3BucketName = 'decipher-audio-files';
 
-    const params = {
-        TranscriptionJobName: jobName,
-        LanguageCode: "en-US",
-        MediaFormat: "mp3",
-        Media: {
-            MediaFileUri: `s3://decipher-audio-files/${s3FileName}`,
-        },
-        OutputBucketName: s3BucketName
-    };
-
     const startTranscriptionJob = async () => {
         setIsLoading(true);
         const formData = new FormData();
         formData.append('file', s3FileBody);
         formData.append('jobName', jobName);
+        formData.append('inputUrlRef', inputUrlRef);
 
-        if (s3FileName.length > 1 && transcriptTimestampMap.length < 1) {
+        console.log("inputUrlRef: ", inputUrlRef);
+
+        if (s3FileName.length > 1 && transcriptTimestampMap.length < 1 || inputUrlRef.length > 1) {
             axios.post('http://localhost:3001/transcribe', formData,
                 {
                     headers: {
@@ -80,12 +73,6 @@ function UploadForm() {
     const displayKeywordTimestampMatch = () => {
         let result: any[] = [];
 
-        // transcriptTimestampMap.forEach((item: string | any) => {
-        //     if (rawCharacters(item.keyword) && item.timestamp) {
-        //         result.push(item.keyword + ' ... ' + formatTimestamp(item.timestamp) + 's')
-        //     }
-        // })
-
         tags.forEach((tag: string) => {
             transcriptTimestampMap.forEach((item: string | any) => {
                 if (rawCharacters(tag) === rawCharacters(item.keyword) && item.timestamp) {
@@ -106,9 +93,9 @@ function UploadForm() {
         event.preventDefault();
         setJobName(s3FileName + uuidv4());
         setInputUrlRef(youtubeParser(event?.target.value))
-        if (inputUrlRef && inputUrlRef != '') {
-            getMp3FromYoutubeLink(event);
-        }
+        // if (inputUrlRef && inputUrlRef != '') {
+        //     getTranscriptFromURL(event);
+        // }
         startTranscriptionJob();
     }
 
@@ -118,25 +105,30 @@ function UploadForm() {
         setInputUrlRef(youtubeParser(event?.target.value))
     }
 
-    // still working on the youtube mp3 conversion
-    const getMp3FromYoutubeLink = async (event: any) => {
+    const getTranscriptFromURL = async (event: any) => {
         try {
-            axios.post('http://localhost:3001/saveMP3')
+            axios.post('http://localhost:3001/processTranscriptFromURL')
                 .then(response => {
-                    // const base64Mp3Result = response.data.dataUrl;
-                    // console.log("base64Mp3Result: ", base64Mp3Result);
-                    // console.log("response.data: ", response.data);
-                    // console.log("response: ", response);
-
-                    // setS3FileBody(Buffer.from(base64Mp3Result, 'base64'));
-                    // setS3FileName(mp3DownloadUrl);
-
-                    // Assuming you're using React:
-                    // Set the state with this data URL and use it in an <audio> element:
-                    // <audio controls src={mp3DataUrl}></audio>
+                    if (!response) {
+                        throw new Error('Network response was not ok');
+                    }
+                    setIsLoading(true);
+                    return response.data;
                 })
-                .catch(error => {
-                    console.error('There was an error:', error);
+                .then(data => {
+                    if (data.fullTranscript) {
+                        setTranscriptionComplete(true);
+                        setFullTranscript(data.fullTranscript);
+                        setIsLoading(false);
+                    }
+                    if (data.transcriptTimestampMap) {
+                        setTranscriptTimestampMap(data.transcriptTimestampMap);
+                    }
+                    setIsLoading(false);
+                })
+                .catch(err => {
+                    setError(err.message);
+                    setIsLoading(false);
                 });
         } catch (error) {
             console.error(error);
@@ -160,15 +152,8 @@ function UploadForm() {
             </Row>
             <Row>
                 <Col>
-                    <Form.Group controlId="formLabel" className="mb-2">
-                        <Form.Label className='formLabel'>Or</Form.Label>
-                    </Form.Group>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
                     <Form.Group controlId="formText" className="mb-2">
-                        <Form.Control onChange={handleURLInputChange} type="text" placeholder='Insert YouTube link...' />
+                        <Form.Control onChange={handleURLInputChange} type="text" placeholder='Or insert YouTube link...' />
                     </Form.Group>
                 </Col>
             </Row>

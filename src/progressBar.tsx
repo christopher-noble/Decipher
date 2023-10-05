@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const ProgressBar = ({
     visible = true,
     height = '80',

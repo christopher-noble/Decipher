@@ -34,11 +34,11 @@
 }
 
 .delete-button {
-    width: 14%;
-    min-width: 100px;
-    min-height: 40px;
+    width: auto;
+    font-size: x-small;
     margin-left: 4%;
     margin-right: 4%;
+    margin-top: -20px;
     padding: auto;
     display: inline-block;
     position: absolute;

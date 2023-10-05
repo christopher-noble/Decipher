@@ -13,7 +13,7 @@ const KeywordTags = (props: any) => {
             onTags={(value) => props.setTags(value.values)}
             className="tag-area"
             elementClassName="tag-element"
-            placeholder="What keywords do you want search?"
+            placeholder="Type keywords..."
           />
         </div>
         <div className="delete-button-area">
@@ -25,7 +25,7 @@ const KeywordTags = (props: any) => {
               props.setTags([]);
             }}
           >
-            Delete all
+            Clear All
           </button>
         </div>
       </div>
