@@ -92,7 +92,7 @@ function UploadForm() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setJobName(s3FileName + uuidv4());
-        setInputUrlRef(youtubeParser(event?.target.value))
+        // setInputUrlRef(youtubeParser(event?.target.value))
         // if (inputUrlRef && inputUrlRef != '') {
         //     getTranscriptFromURL(event);
         // }
