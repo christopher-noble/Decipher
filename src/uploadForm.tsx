@@ -1,52 +1,29 @@
+import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import './css/uploadForm.css'
+import './css/keywordTags.css'
 import { useState } from 'react';
-import { StartTranscriptionJobCommand, GetTranscriptionJobCommand, TranscribeClient } from "@aws-sdk/client-transcribe";
-import { GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import ProgressBar from './progressBar';
 import KeywordTags from './keywordTags';
+import { formatTimestamp, rawCharacters, youtubeParser } from './util';
 const { v4: uuidv4 } = require('uuid');
-
-const rawCharacters = (string: string) => {
-    return string.replaceAll(/[^a-zA-z]/g, "").toLowerCase();
-}
-
-const formatTimestamp = (num: string) => {
-    let result: string = '';
-    if (num.indexOf('.') === 1) {
-        result = num.replaceAll("[^0-9]", "").substring(0, 1);
-    }
-    else {
-        result = num.replaceAll("[^0-9]", "").substring(0, 2);
-    }
-    return result;
-}
-
-const awsCreds = {
-    region: 'us-west-2',
-    credentials: {
-        accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY!,
-    }
-}
 
 function UploadForm() {
     const [fullTranscript, setFullTranscript] = useState<any | null>('');
     const [s3FileBody, setS3FileBody] = useState<any | null>('');
     const [s3FileName, setS3FileName] = useState<any | null>('');
-    const [jobName] = useState<any | null>(s3FileName + uuidv4());
+    const [jobName, setJobName] = useState<any | null>(s3FileName + uuidv4());
     const [isLoading, setIsLoading] = useState<any | null>(false);
     const [transcriptionComplete, setTranscriptionComplete] = useState<any | null>(false);
     const [transcriptTimestampMap, setTranscriptTimestampMap] = useState<any | null>([]);
     const [tags, setTags] = useState<any | null>('');
+    const [inputUrlRef, setInputUrlRef] = useState<any | null>('');
+    const [error, setError] = useState(null);
 
     const s3BucketName = 'decipher-audio-files';
-
-    const transcribeClient = new TranscribeClient(awsCreds);
-    const s3Client = new S3Client(awsCreds);
 
     const params = {
         TranscriptionJobName: jobName,
@@ -58,34 +35,41 @@ function UploadForm() {
         OutputBucketName: s3BucketName
     };
 
-    const startTranscriptionJob = async (event: any) => {
-        if (s3FileName !== '' && s3FileName !== null && transcriptTimestampMap.length < 1) {
-            setIsLoading(true);
-            const command = new PutObjectCommand({
-                Bucket: s3BucketName,
-                Key: s3FileName,
-                Body: s3FileBody,
-            });
+    const startTranscriptionJob = async () => {
+        setIsLoading(true);
+        const formData = new FormData();
+        formData.append('file', s3FileBody);
+        formData.append('jobName', jobName);
 
-            try {
-                const response = await s3Client.send(command);
-                console.log("S3 upload response: ", response);
-            } catch (err) {
-                console.error("error when uploading to S3 bitch: ", err);
-            }
-
-            setTimeout(async () => {
-                console.log("delayed for 3 seconds")
-                try {
-                    const data = await transcribeClient.send(
-                        new StartTranscriptionJobCommand(params)
-                    );
-                    console.log("StartTranscriptionJobCommand success - put", data);
-                    getTranscriptionDetails();
-                } catch (err) {
-                    console.log("Error", err);
-                }
-            }, 3000);
+        if (s3FileName.length > 1 && transcriptTimestampMap.length < 1) {
+            axios.post('http://localhost:3001/transcribe', formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    },
+                })
+                .then(response => {
+                    if (!response) {
+                        throw new Error('Network response was not ok');
+                    }
+                    setIsLoading(true);
+                    return response.data;
+                })
+                .then(data => {
+                    if (data.fullTranscript) {
+                        setTranscriptionComplete(true);
+                        setFullTranscript(data.fullTranscript);
+                        setIsLoading(false);
+                    }
+                    if (data.transcriptTimestampMap) {
+                        setTranscriptTimestampMap(data.transcriptTimestampMap);
+                    }
+                    setIsLoading(false);
+                })
+                .catch(err => {
+                    setError(err.message);
+                    setIsLoading(false);
+                });
         }
         else {
             setIsLoading(false);
@@ -93,52 +77,14 @@ function UploadForm() {
         }
     };
 
-    const fetchURLData = async () => {
-        const command = new GetObjectCommand({
-            Bucket: s3BucketName,
-            Key: `${jobName}.json`
-        });
-
-        try {
-            const response = await s3Client.send(command);
-            const result = await response.Body?.transformToString();
-            if (result) {
-                const jsonOutput = await JSON.parse(result);
-                let keywordTimestamp: any = [];
-                setFullTranscript(jsonOutput.results.transcripts[0].transcript);
-                jsonOutput.results.items.forEach((item: any) => {
-                    keywordTimestamp.push({ 'keyword': item.alternatives[0].content, 'timestamp': item.start_time })
-                })
-                setTranscriptTimestampMap(keywordTimestamp);
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    }
-
-    const getTranscriptionDetails = async () => {
-        try {
-            const data = await transcribeClient.send(new GetTranscriptionJobCommand(params));
-            const status = data.TranscriptionJob?.TranscriptionJobStatus;
-            if (status === "COMPLETED") {
-                setIsLoading(false);
-                setTranscriptionComplete(true);
-                fetchURLData();
-            } else if (status === "FAILED") {
-                setIsLoading(false);
-                alert('Transcription Failed: ' + data.TranscriptionJob?.FailureReason);
-            } else {
-                console.log("In Progress...");
-                setIsLoading(true);
-                getTranscriptionDetails();
-            }
-        } catch (err) {
-            console.log("Error", err);
-        }
-    };
-
     const displayKeywordTimestampMatch = () => {
         let result: any[] = [];
+
+        // transcriptTimestampMap.forEach((item: string | any) => {
+        //     if (rawCharacters(item.keyword) && item.timestamp) {
+        //         result.push(item.keyword + ' ... ' + formatTimestamp(item.timestamp) + 's')
+        //     }
+        // })
 
         tags.forEach((tag: string) => {
             transcriptTimestampMap.forEach((item: string | any) => {
@@ -151,9 +97,50 @@ function UploadForm() {
         return result.join('\n');
     }
 
-    const setFile = (event: any) => {
+    const setFile = async (event: any) => {
         setS3FileBody(event.target.files[0]);
         setS3FileName(event.target.files[0].name);
+    }
+
+    const handleSubmit = (event: any) => {
+        event.preventDefault();
+        setJobName(s3FileName + uuidv4());
+        setInputUrlRef(youtubeParser(event?.target.value))
+        if (inputUrlRef && inputUrlRef != '') {
+            getMp3FromYoutubeLink(event);
+        }
+        startTranscriptionJob();
+    }
+
+    const handleURLInputChange = (event: any) => {
+        event.preventDefault();
+        console.log("event.target.value: ", youtubeParser(event?.target.value));
+        setInputUrlRef(youtubeParser(event?.target.value))
+    }
+
+    // still working on the youtube mp3 conversion
+    const getMp3FromYoutubeLink = async (event: any) => {
+        try {
+            axios.post('http://localhost:3001/saveMP3')
+                .then(response => {
+                    // const base64Mp3Result = response.data.dataUrl;
+                    // console.log("base64Mp3Result: ", base64Mp3Result);
+                    // console.log("response.data: ", response.data);
+                    // console.log("response: ", response);
+
+                    // setS3FileBody(Buffer.from(base64Mp3Result, 'base64'));
+                    // setS3FileName(mp3DownloadUrl);
+
+                    // Assuming you're using React:
+                    // Set the state with this data URL and use it in an <audio> element:
+                    // <audio controls src={mp3DataUrl}></audio>
+                })
+                .catch(error => {
+                    console.error('There was an error:', error);
+                });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
@@ -170,10 +157,28 @@ function UploadForm() {
                         <Form.Control type="file" />
                     </Form.Group>
                 </Col>
-                <Col xs='auto'>
-                    <Button type="submit" className="btn btn-dark" onClick={startTranscriptionJob}>
-                        Submit
-                    </Button>
+            </Row>
+            <Row>
+                <Col>
+                    <Form.Group controlId="formLabel" className="mb-2">
+                        <Form.Label className='formLabel'>Or</Form.Label>
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Form.Group controlId="formText" className="mb-2">
+                        <Form.Control onChange={handleURLInputChange} type="text" placeholder='Insert YouTube link...' />
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Form.Group controlId="formButton" className="mb-2">
+                        <Button type="submit" className="btn btn-dark submit" onClick={handleSubmit}>
+                            Submit
+                        </Button>
+                    </Form.Group>
                 </Col>
             </Row>
             <Row>
@@ -189,7 +194,7 @@ function UploadForm() {
                         : ''
                 }
                 {
-                    transcriptionComplete ?
+                    transcriptionComplete && !isLoading ?
                         <Row className='transcriptionRow'>
                             <Col>
                                 <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea1">

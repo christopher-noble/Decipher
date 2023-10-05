@@ -31,26 +31,16 @@
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
-    float: right;
 }
 
 .delete-button {
     width: 14%;
+    min-width: 100px;
+    min-height: 40px;
     margin-left: 4%;
     margin-right: 4%;
     padding: auto;
     display: inline-block;
-}
-
-.input-group {
-    display: inline;
-}
-
-hr {
-    width: 39%;
-    display: inline-block;
-    margin-bottom: 4px;
-    margin-left: 0px;
-    margin-right: 0px;
-    padding: 0px;
+    position: absolute;
+    text-overflow: ellipsis;
 }

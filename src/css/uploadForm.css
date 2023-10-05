@@ -7,3 +7,20 @@
     margin: 0;
     margin-top: 2%;
 }
+
+.formLabel {
+    font-size: larger;
+    width: 14%;
+    margin-left: 4%;
+    margin-right: 4%;
+    padding: auto;
+    display: inline-block;
+}
+
+.submit {
+    width: 14%;
+    min-width: 100px;
+    min-height: 40px;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+}

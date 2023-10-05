@@ -1,11 +1,8 @@
-import { InputTags } from "react-bootstrap-tagsinput";
+import { InputTags } from "./inputTags";
 import "react-bootstrap-tagsinput/dist/index.css";
-import { useState } from "react";
 import './css/keywordTags.css'
 
-
 const KeywordTags = (props: any) => {
-  // const [tags, setTags] = useState<any | null>('');
   return (
     <div>
       <br />
@@ -16,10 +13,10 @@ const KeywordTags = (props: any) => {
             onTags={(value) => props.setTags(value.values)}
             className="tag-area"
             elementClassName="tag-element"
+            placeholder="What keywords do you want search?"
           />
         </div>
         <div className="delete-button-area">
-          <hr/>
           <button
             className="btn btn-outline-dark delete-button"
             type="button"
@@ -30,7 +27,6 @@ const KeywordTags = (props: any) => {
           >
             Delete all
           </button>
-          <hr/>
         </div>
       </div>
     </div>
