@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="App">
       <header>
-        <h1>Decipher Audio</h1>
+        <h1>Decipher</h1>
         <br></br>
         <h5>Accepted Formats:</h5>
         <h6> mp3 | mp4 | wav | flac | ogg | amr | webm</h6>

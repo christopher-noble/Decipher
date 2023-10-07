@@ -30,8 +30,6 @@ function UploadForm() {
         formData.append('jobName', jobName);
         formData.append('inputUrlRef', inputUrlRef);
 
-        console.log("inputUrlRef: ", inputUrlRef);
-
         if (s3FileName.length > 1 && transcriptTimestampMap.length < 1 || inputUrlRef.length > 1) {
             axios.post('http://localhost:3001/transcribe', formData,
                 {
@@ -101,12 +99,10 @@ function UploadForm() {
 
     return (
         <>
-            <Row>
-                <KeywordTags
-                    tags={tags}
-                    setTags={setTags}
-                />
-            </Row>
+            <KeywordTags
+                tags={tags}
+                setTags={setTags}
+            />
             <Row>
                 <Col>
                     <Form.Group controlId="formFile" className="mb-2" onChange={setFile}>

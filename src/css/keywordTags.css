@@ -27,20 +27,22 @@
     margin: auto;
 }
 
+.input-group {
+    margin-bottom: 1%;
+    padding-right: 0px;
+}
+
 .delete-button-area {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: 0;
+    padding-left: 0;
 }
 
 .delete-button {
+    font-size: small;
+    height: 100%;
     width: auto;
-    font-size: x-small;
-    margin-left: 4%;
-    margin-right: 4%;
-    margin-top: -20px;
-    padding: auto;
+    max-height: 72px;
+    min-width: 100px;
     display: inline-block;
-    position: absolute;
-    text-overflow: ellipsis;
 }

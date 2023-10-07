@@ -1,13 +1,12 @@
 import { InputTags } from "../utils/inputTags";
 import "react-bootstrap-tagsinput/dist/index.css";
 import '../css/keywordTags.css'
+import { Button, Col, Row } from "react-bootstrap";
 
 const KeywordTags = (props: any) => {
   return (
-    <div>
-      <br />
-      <div className="input-group">
-        <div className="input-area">
+      <Row className="input-group">
+        <Col className="input-area">
           <InputTags
             values={props.tags}
             onTags={(value) => props.setTags(value.values)}
@@ -15,10 +14,10 @@ const KeywordTags = (props: any) => {
             elementClassName="tag-element"
             placeholder="Type keywords..."
           />
-        </div>
-        <div className="delete-button-area">
-          <button
-            className="btn btn-outline-dark delete-button"
+        </Col>
+        <Col xs='auto' className="delete-button-area">
+          <Button
+            className="btn btn-light delete-button"
             type="button"
             data-testid="button-clearAll"
             onClick={() => {
@@ -26,10 +25,9 @@ const KeywordTags = (props: any) => {
             }}
           >
             Clear All
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Col>
+      </Row>
   );
 }
 
