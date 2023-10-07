@@ -17,12 +17,12 @@ To get Decipher up and running locally, follow these steps:
 2. Install the required dependencies:
 ```npm install```
 
-4. Start the development server:
+3. Start the development server:
 ```npm start```
 
-The frontend should now be accessible in your web browser at `http://localhost:3000`.
+   The frontend should now be accessible in your web browser at `http://localhost:3000`.
 
-5. [Clone Decipher Backend](https://github.com/christopher-noble/decipher-backend)
+4. [Clone Decipher Backend](https://github.com/christopher-noble/decipher-backend)
 
 
 ## Join the Revolution
