@@ -7,25 +7,16 @@ Welcome to the Decipher frontend repository! This is the client-side component o
 - **React**
 - **TypeScript**
 
-## Getting Started
+## Features
 
-To get Decipher up and running locally, follow these steps:
-
-1. Clone this frontend repository:
-```git clone https://github.com/your-username/decipher-frontend.git```
-
-2. Install the required dependencies:
-```npm install```
-
-3. Start the development server:
-```npm start```
-
-   The frontend should now be accessible in your web browser at `http://localhost:3000`.
-
-4. [Clone Decipher Backend](https://github.com/christopher-noble/decipher-backend)
-
+- **User-Friendly Interface**: Simplify audio content management and access.
+- **Real-Time Transcription Updates**: Monitor progress in real-time.
+- **Keyword Tagging**: Input and tag keywords for transcription and timestamping.
+- **Seamless Backend Integration**: Connect seamlessly with the Decipher backend.
 
 ## Join the Revolution
 
 Unlock the power of audio content with Decipher. Embrace the future of audio transcription and timestamp generation with our frontend solution. Try it out today!
+
+[Visit Decipher Backend](https://github.com/christopher-noble/decipher-backend)
 
