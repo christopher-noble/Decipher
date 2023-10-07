@@ -1,5 +1,5 @@
 # Decipher
-Welcome to Decipher, a revolutionary platform designed to enhance your audio content consumption experience. With Decipher, you can easily navigate through audio files, find specific moments, and share them effortlessly.
+Welcome to Decipher, a revolutionary platform designed to enhance your audio content consumption experience. With Decipher, you can easily navigate through audio files and capture any moment without tirelessly searching.
 
 ## Problem Statement
 In today's world, podcasts, audiobooks, and various audio content have become increasingly popular. However, locating specific segments within these audio files can be a challenging and time-consuming task. The current options, such as manually fast-forwarding or rewinding, are inefficient and frustrating.
