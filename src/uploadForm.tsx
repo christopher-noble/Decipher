@@ -23,8 +23,6 @@ function UploadForm() {
     const [inputUrlRef, setInputUrlRef] = useState<any | null>('');
     const [error, setError] = useState(null);
 
-    const s3BucketName = 'decipher-audio-files';
-
     const startTranscriptionJob = async () => {
         setIsLoading(true);
         const formData = new FormData();
@@ -92,10 +90,6 @@ function UploadForm() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         setJobName(s3FileName + uuidv4());
-        // setInputUrlRef(youtubeParser(event?.target.value))
-        // if (inputUrlRef && inputUrlRef != '') {
-        //     getTranscriptFromURL(event);
-        // }
         startTranscriptionJob();
     }
 
@@ -103,36 +97,6 @@ function UploadForm() {
         event.preventDefault();
         console.log("event.target.value: ", youtubeParser(event?.target.value));
         setInputUrlRef(youtubeParser(event?.target.value))
-    }
-
-    const getTranscriptFromURL = async (event: any) => {
-        try {
-            axios.post('http://localhost:3001/processTranscriptFromURL')
-                .then(response => {
-                    if (!response) {
-                        throw new Error('Network response was not ok');
-                    }
-                    setIsLoading(true);
-                    return response.data;
-                })
-                .then(data => {
-                    if (data.fullTranscript) {
-                        setTranscriptionComplete(true);
-                        setFullTranscript(data.fullTranscript);
-                        setIsLoading(false);
-                    }
-                    if (data.transcriptTimestampMap) {
-                        setTranscriptTimestampMap(data.transcriptTimestampMap);
-                    }
-                    setIsLoading(false);
-                })
-                .catch(err => {
-                    setError(err.message);
-                    setIsLoading(false);
-                });
-        } catch (error) {
-            console.error(error);
-        }
     }
 
     return (
