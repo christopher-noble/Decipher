@@ -3,12 +3,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import './css/uploadForm.css'
-import './css/keywordTags.css'
+import '../css/uploadForm.css'
+import '../css/keywordTags.css'
 import { useState } from 'react';
 import ProgressBar from './progressBar';
 import KeywordTags from './keywordTags';
-import { formatTimestamp, rawCharacters, youtubeParser } from './util';
+import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
 const { v4: uuidv4 } = require('uuid');
 
 function UploadForm() {

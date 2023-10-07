@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import UploadForm from './uploadForm';
+import UploadForm from './components/uploadForm';
 import './css/header.css';
 import './css/homeContent.css';
 

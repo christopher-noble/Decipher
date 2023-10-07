@@ -1,6 +1,6 @@
-import { InputTags } from "./inputTags";
+import { InputTags } from "../utils/inputTags";
 import "react-bootstrap-tagsinput/dist/index.css";
-import './css/keywordTags.css'
+import '../css/keywordTags.css'
 
 const KeywordTags = (props: any) => {
   return (
