@@ -15,6 +15,10 @@ Welcome to the Decipher frontend repository. This is the client-side component o
 - **Keyword Tagging**: Input and tag keywords for transcription and timestamping.
 - **Seamless Backend Integration**: Connect seamlessly with the Decipher backend.
 
+## Support
+
+If you have any questions, encounter issues, or want to provide feedback, feel free to reach out to us via [email](mailto:chris.noble@oceangold.ca) or create an [issue](https://github.com/christopher-noble/decipher-frontend/issues) in this repository.
+
 ## Join the Revolution
 
 Unlock the power of audio content with Decipher. Embrace the future of audio transcription and timestamp generation with our frontend solution. Try it out today!
