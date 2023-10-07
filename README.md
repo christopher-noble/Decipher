@@ -9,9 +9,9 @@ Welcome to the Decipher frontend repository! This is the client-side component o
 
 ## Getting Started
 
-To get the Decipher frontend up and running locally, follow these steps:
+To get Decipher up and running locally, follow these steps:
 
-1. Clone this repository:
+1. Clone this frontend repository:
 ```git clone https://github.com/your-username/decipher-frontend.git```
 
 2. Install the required dependencies:
@@ -22,10 +22,10 @@ To get the Decipher frontend up and running locally, follow these steps:
 
 The frontend should now be accessible in your web browser at `http://localhost:3000`.
 
+5. [Clone Decipher Backend](https://github.com/christopher-noble/decipher-backend)
+
+
 ## Join the Revolution
 
 Unlock the power of audio content with Decipher. Embrace the future of audio transcription and timestamp generation with our frontend solution. Try it out today!
-
-[Visit Decipher Backend](https://github.com/christopher-noble/decipher-backend)
-
 
