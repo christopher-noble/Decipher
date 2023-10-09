@@ -12,25 +12,23 @@ import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
 const { v4: uuidv4 } = require('uuid');
 
 function UploadForm() {
-    const [fullTranscript, setFullTranscript] = useState<any | null>('');
-    const [s3FileBody, setS3FileBody] = useState<any | null>('');
-    const [s3FileName, setS3FileName] = useState<any | null>('');
-    const [jobName, setJobName] = useState<any | null>(s3FileName + uuidv4());
+    const [fullTranscript, setFullTranscript] = useState<string | string[]>('');
+    const [fileBody, setFileBody] = useState<string | any>('');
+    const [fileName, setFileName] = useState<any | null>('');
     const [isLoading, setIsLoading] = useState<any | null>(false);
     const [transcriptionComplete, setTranscriptionComplete] = useState<any | null>(false);
     const [transcriptTimestampMap, setTranscriptTimestampMap] = useState<any | null>([]);
     const [tags, setTags] = useState<any | null>('');
     const [inputUrlRef, setInputUrlRef] = useState<any | null>('');
-    const [error, setError] = useState(null);
 
     const startTranscriptionJob = async () => {
         setIsLoading(true);
         const formData = new FormData();
-        formData.append('file', s3FileBody);
-        formData.append('jobName', jobName);
+        formData.append('file', fileBody);
+        formData.append('jobName', uuidv4());
         formData.append('inputUrlRef', inputUrlRef);
 
-        if (s3FileName.length > 1 && transcriptTimestampMap.length < 1 || inputUrlRef.length > 1) {
+        if (fileName.length > 1 || inputUrlRef.length > 1) {
             axios.post('http://localhost:3001/transcribe', formData,
                 {
                     headers: {
@@ -41,10 +39,11 @@ function UploadForm() {
                     if (!response) {
                         throw new Error('Network response was not ok');
                     }
-                    setIsLoading(true);
                     return response.data;
                 })
                 .then(data => {
+                    setIsLoading(true);
+
                     if (data.fullTranscript) {
                         setTranscriptionComplete(true);
                         setFullTranscript(data.fullTranscript);
@@ -53,11 +52,10 @@ function UploadForm() {
                     if (data.transcriptTimestampMap) {
                         setTranscriptTimestampMap(data.transcriptTimestampMap);
                     }
-                    setIsLoading(false);
                 })
                 .catch(err => {
-                    setError(err.message);
                     setIsLoading(false);
+                    alert("Internal Server Error: either could not connect or data is invalid");
                 });
         }
         else {
@@ -69,32 +67,50 @@ function UploadForm() {
     const displayKeywordTimestampMatch = () => {
         let result: any[] = [];
 
-        tags.forEach((tag: string) => {
-            transcriptTimestampMap.forEach((item: string | any) => {
-                if (rawCharacters(tag) === rawCharacters(item.keyword) && item.timestamp) {
-                    result.push(item.keyword + ' ... ' + formatTimestamp(item.timestamp) + 's')
+        for (let tag of tags) {
+            // Split the phrase into words
+            let words = tag.split(" ");
+            let timestampsForTag = [];
+
+            for (let i = 0; i < transcriptTimestampMap.length; i++) {
+                let matches = true;
+
+                for (let j = 0; j < words.length; j++) {
+                    // If there's a mismatch, break and set matches to false
+                    if (rawCharacters(transcriptTimestampMap[i + j].keyword) !== rawCharacters(words[j])) {
+                        matches = false;
+                        break;
+                    }
                 }
-            })
-        })
+
+                // If all words match, see if the tag is already in the result
+                if (matches) {
+                    timestampsForTag.push(formatTimestamp(transcriptTimestampMap[i].timestamp));
+                }
+            }
+
+            // If there are timestamps for this tag, add them to the result
+            if (timestampsForTag.length) {
+                result.push(`${tag}: ${timestampsForTag.join(', ')}`);
+            }
+        }
 
         return result.join('\n');
     }
 
-    const setFile = async (event: any) => {
-        setS3FileBody(event.target.files[0]);
-        setS3FileName(event.target.files[0].name);
+    const setFileChange = async (event: any) => {
+        setFileBody(event.target.files[0]);
+        setFileName(event.target.files[0].name);
+    }
+
+    const setUrlChange = (event: any) => {
+        event.preventDefault();
+        setInputUrlRef(youtubeParser(event?.target.value))
     }
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        setJobName(s3FileName + uuidv4());
         startTranscriptionJob();
-    }
-
-    const handleURLInputChange = (event: any) => {
-        event.preventDefault();
-        console.log("event.target.value: ", youtubeParser(event?.target.value));
-        setInputUrlRef(youtubeParser(event?.target.value))
     }
 
     return (
@@ -105,7 +121,7 @@ function UploadForm() {
             />
             <Row>
                 <Col>
-                    <Form.Group controlId="formFile" className="mb-2" onChange={setFile}>
+                    <Form.Group controlId="formFile" className="mb-2" onChange={setFileChange}>
                         <Form.Control type="file" />
                     </Form.Group>
                 </Col>
@@ -113,7 +129,7 @@ function UploadForm() {
             <Row>
                 <Col>
                     <Form.Group controlId="formText" className="mb-2">
-                        <Form.Control onChange={handleURLInputChange} type="text" placeholder='Or insert YouTube link...' />
+                        <Form.Control onChange={setUrlChange} type="text" placeholder='Or insert YouTube link...' />
                     </Form.Group>
                 </Col>
             </Row>
@@ -143,12 +159,12 @@ function UploadForm() {
                         <Row className='transcriptionRow'>
                             <Col>
                                 <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea1">
-                                    <Form.Control as="textarea" rows={10} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
+                                    <Form.Control as="textarea" disabled={true} rows={10} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea2">
-                                    <Form.Control as="textarea" rows={10} onChange={(e) => setTranscriptTimestampMap(e.target.value)} value={displayKeywordTimestampMatch()}></Form.Control>
+                                    <Form.Control as="textarea" disabled={true} rows={10} onChange={(e) => setTranscriptTimestampMap(e.target.value)} value={displayKeywordTimestampMatch()}></Form.Control>
                                 </Form.Group>
                             </Col>
                         </Row>

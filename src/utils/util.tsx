@@ -1,12 +1,10 @@
-export const formatTimestamp = (num: string) => {
-    let result: string = '';
-    if (num.indexOf('.') === 1) {
-        result = num.replaceAll("[^0-9]", "").substring(0, 1);
-    }
-    else {
-        result = num.replaceAll("[^0-9]", "").substring(0, 2);
-    }
-    return result;
+export const formatTimestamp = (timestamp: string) => {
+    let totalSeconds = Math.round(parseFloat(timestamp));
+
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+
+    return `${minutes}:${String(seconds).padStart(2, '0')}`;
 }
 
 export const youtubeParser = (url: string) => {
