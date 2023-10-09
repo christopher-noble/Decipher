@@ -1,8 +1,21 @@
 .homeContent {
     height: 100%;
-    width: 50%;
-    margin-top: 3%;
+    width: 65%;
+    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
+    padding: auto;
+    background-color: var(--gray-800);
+    color: var(--gray-100);
+}
+
+.homeContent header{
+    margin-bottom: 50px;
+    font-family: var(--primary-font);
+}
+
+.homeContent header h1{
+    margin-bottom: 50px;
+    font-family: var(--logo-font);
 }

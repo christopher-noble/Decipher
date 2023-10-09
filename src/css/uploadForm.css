@@ -24,3 +24,20 @@
     margin-top: 10px;
     text-overflow: ellipsis;
 }
+
+.file-selector {
+    background-color: var(--surface-tertiary) !important;
+    color: var(--text-primary);
+    border-color: transparent;
+}
+
+.url-input {
+    background-color: var(--surface-tertiary) !important;
+    color: var(black);
+    border-color: transparent;
+    border-radius: 5px;
+}
+
+.url-input ::placeholder {
+    color: var(--text-tertiary)
+}

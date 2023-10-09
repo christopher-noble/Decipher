@@ -4,6 +4,7 @@
     vertical-align: center;
     background-color: transparent;
     justify-content: space-evenly;
+    color: var(--text-primary)
 }
 
 .tag-element {
@@ -27,9 +28,17 @@
     margin: auto;
 }
 
+.tag-input {
+    color: var(--text-primary);
+    border: none;
+    background-color: var(--surface-primary);
+}
+
 .input-group {
-    margin-bottom: 1%;
+    margin-bottom: 2%;
     padding-right: 0px;
+    color: white;
+
 }
 
 .delete-button-area {
@@ -45,4 +54,7 @@
     max-height: 72px;
     min-width: 100px;
     display: inline-block;
+    background-color: var(--surface-tertiary);
+    border: none;
+    color: var(--text-primary)
 }

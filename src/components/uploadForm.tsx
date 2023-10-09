@@ -122,14 +122,12 @@ function UploadForm() {
             <Row>
                 <Col>
                     <Form.Group controlId="formFile" className="mb-2" onChange={setFileChange}>
-                        <Form.Control type="file" />
+                        <Form.Control className="file-selector"type="file" />
                     </Form.Group>
                 </Col>
-            </Row>
-            <Row>
                 <Col>
-                    <Form.Group controlId="formText" className="mb-2">
-                        <Form.Control onChange={setUrlChange} type="text" placeholder='Or insert YouTube link...' />
+                    <Form.Group controlId="formText" className="mb-2 url-input">
+                        <Form.Control className="url-input" onChange={setUrlChange} type="text" placeholder='Or insert YouTube link...' />
                     </Form.Group>
                 </Col>
             </Row>
