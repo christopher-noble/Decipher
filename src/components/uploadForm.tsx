@@ -5,10 +5,10 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import '../css/uploadForm.css'
 import '../css/keywordTags.css'
-import { useState } from 'react';
-import ProgressBar from './progressBar';
+import { CSSProperties, useState } from 'react';
 import KeywordTags from './keywordTags';
 import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
+import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
 function UploadForm() {
@@ -20,15 +20,25 @@ function UploadForm() {
     const [transcriptTimestampMap, setTranscriptTimestampMap] = useState<any | null>([]);
     const [tags, setTags] = useState<any | null>('');
     const [inputUrlRef, setInputUrlRef] = useState<any | null>('');
+    const [error, setError] = useState<string | null>(null);
+    const [attemptedSubmission, setAttemptedSubmission] = useState<boolean | null>(null);
 
     const startTranscriptionJob = async () => {
         setIsLoading(true);
         const formData = new FormData();
-        formData.append('file', fileBody);
         formData.append('jobName', uuidv4());
-        formData.append('inputUrlRef', inputUrlRef);
 
-        if (fileName.length > 1 || inputUrlRef.length > 1) {
+        if (fileName && fileBody) {
+            formData.append('file', fileBody);
+        }
+        else if (inputUrlRef) {
+            formData.append('inputUrlRef', inputUrlRef);
+        }
+        else {
+            setError("Missing submission");
+        }
+
+        if ((inputUrlRef || fileName)) {
             axios.post('http://localhost:3001/transcribe', formData,
                 {
                     headers: {
@@ -37,6 +47,7 @@ function UploadForm() {
                 })
                 .then(response => {
                     if (!response) {
+                        setError('Could not connect to the server. Please try again.')
                         throw new Error('Network response was not ok');
                     }
                     return response.data;
@@ -55,12 +66,11 @@ function UploadForm() {
                 })
                 .catch(err => {
                     setIsLoading(false);
-                    alert("Internal Server Error: either could not connect or data is invalid");
+                    setError('Could not connect to the server. Please try again.')
                 });
         }
         else {
             setIsLoading(false);
-            alert("Please upload a file");
         }
     };
 
@@ -68,7 +78,6 @@ function UploadForm() {
         let result: any[] = [];
 
         for (let tag of tags) {
-            // Split the phrase into words
             let words = tag.split(" ");
             let timestampsForTag = [];
 
@@ -76,20 +85,17 @@ function UploadForm() {
                 let matches = true;
 
                 for (let j = 0; j < words.length; j++) {
-                    // If there's a mismatch, break and set matches to false
                     if (rawCharacters(transcriptTimestampMap[i + j].keyword) !== rawCharacters(words[j])) {
                         matches = false;
                         break;
                     }
                 }
 
-                // If all words match, see if the tag is already in the result
                 if (matches) {
                     timestampsForTag.push(formatTimestamp(transcriptTimestampMap[i].timestamp));
                 }
             }
 
-            // If there are timestamps for this tag, add them to the result
             if (timestampsForTag.length) {
                 result.push(`${tag}: ${timestampsForTag.join(', ')}`);
             }
@@ -101,17 +107,44 @@ function UploadForm() {
     const setFileChange = async (event: any) => {
         setFileBody(event.target.files[0]);
         setFileName(event.target.files[0].name);
+        setFileName((prevFileName: string) => {
+            const newError = checkSubmissionError(prevFileName, inputUrlRef);
+            setError(newError);
+            return prevFileName;
+        });
     }
 
     const setUrlChange = (event: any) => {
         event.preventDefault();
         setInputUrlRef(youtubeParser(event?.target.value))
+        setInputUrlRef((prevInputUrlRef: string) => {
+            const newError = checkSubmissionError(fileName, prevInputUrlRef);
+            setError(newError);
+            return prevInputUrlRef;
+        });
     }
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        startTranscriptionJob();
+        setAttemptedSubmission(true);
+        if (!error) {
+            startTranscriptionJob();
+        }
     }
+
+
+    const checkSubmissionError = (currentFileName: string, currentInputUrlRef: string) => {
+        if (currentFileName && currentInputUrlRef) {
+            return 'Please only include one submission';
+        }
+        else if (!currentFileName && !currentInputUrlRef) {
+            return 'Missing submission';
+        }
+        return null;
+    };
+
+
+    const errorStyle: CSSProperties = { color: 'red', paddingTop: '5px' };
 
     return (
         <>
@@ -121,8 +154,8 @@ function UploadForm() {
             />
             <Row>
                 <Col>
-                    <Form.Group controlId="formFile" className="mb-2" onChange={setFileChange}>
-                        <Form.Control className="file-selector"type="file" />
+                    <Form.Group controlId="formFile" className="mb-2 custom-file" onChange={setFileChange}>
+                        <Form.Control className="custom-file-label" id="custom-file-input" type="file" />
                     </Form.Group>
                 </Col>
                 <Col>
@@ -131,6 +164,13 @@ function UploadForm() {
                     </Form.Group>
                 </Col>
             </Row>
+            {
+                error && attemptedSubmission ?
+                <Row>
+                    <Form.Label style={errorStyle}>{error}</Form.Label>
+                </Row>
+                : ''
+            }
             <Row>
                 <Col>
                     <Form.Group controlId="formButton" className="mb-2">
@@ -143,13 +183,11 @@ function UploadForm() {
             <Row>
                 {
                     isLoading ?
-                        <ProgressBar
-                            ariaLabel="progress-bar-loading"
-                            wrapperStyle={{ margin: 'auto', width: '500%' }}
-                            wrapperClass="progress-bar-wrapper"
-                            borderColor='#212529'
-                            barColor='#424649'
-                        />
+                        <Col className='spinner-col' xs={12}>
+                            <Spinner animation="border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </Col>
                         : ''
                 }
                 {

@@ -38,7 +38,6 @@
     margin-bottom: 2%;
     padding-right: 0px;
     color: white;
-
 }
 
 .delete-button-area {
@@ -57,4 +56,22 @@
     background-color: var(--surface-tertiary);
     border: none;
     color: var(--text-primary)
+}
+
+@media (max-width : 800px) {
+    .delete-button-area {
+        margin-top: 4%;
+        margin-bottom: 2%;
+        padding-left: 22vw !important;
+        padding-right: auto !important;
+        width: auto !important;
+    }
+
+    .delete-button {
+        font-size: x-small;
+        width: auto;
+        background-color: var(--surface-tertiary);
+        border: none;
+        color: var(--text-primary)
+    }
 }

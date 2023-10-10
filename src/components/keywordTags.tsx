@@ -15,9 +15,9 @@ const KeywordTags = (props: any) => {
             placeholder="Type keywords..."
           />
         </Col>
-        <Col xs='auto' className="delete-button-area">
+        <Col className="col-auto delete-button-area">
           <Button
-            className="btn btn-light delete-button"
+            className="btn btn-dark delete-button"
             type="button"
             data-testid="button-clearAll"
             onClick={() => {
