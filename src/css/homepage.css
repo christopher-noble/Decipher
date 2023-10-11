@@ -18,10 +18,12 @@ header .logo-area {
 
 .home-content {
     margin-bottom: 50px;
-    font-family: var(--primary-font);
+    font-family: var(--secondary-font);
 }
 
-.home-content h4{
+.subheading{
     margin-bottom: 50px;
+    font-size: 200%;
+    font-weight: 200;
     font-family: var(--secondary-font);
 }

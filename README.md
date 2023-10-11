@@ -1,6 +1,6 @@
 # Decipher - Frontend
 
-Welcome to the Decipher frontend repository. This is the client-side component of the Decipher app, designed to enhance your audio content consumption experience. Decipher is a powerful transcription service that takes either YouTube links or user-uploaded audio files as input, processes the audio, and returns full audio transcripts along with timestamps for specified keywords or phrases.
+Welcome to the Decipher frontend repository. This is the client-side component of the Decipher app, designed to enhance your audio content consumption experience. Decipher is a powerful transcription service that takes content as input, processes the audio, and returns full audio transcripts along with timestamps for specified keywords or phrases.
 
 ## Stack
 
@@ -14,6 +14,10 @@ Welcome to the Decipher frontend repository. This is the client-side component o
 - **Real-Time Transcription Updates**: Monitor progress in real-time.
 - **Keyword Tagging**: Input and tag keywords for transcription and timestamping.
 - **Seamless Backend Integration**: Connect seamlessly with the Decipher backend.
+
+## Hosting & Delivery
+
+- Apache server on AWS EC2 instance
 
 ## Support
 
