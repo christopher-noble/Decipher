@@ -32,9 +32,8 @@
 	/* ---------------------- */
 
 	/* ------- fonts ------- */
-  --logo-font: 'Open Sans', sans-serif;
-	--primary-font: "Heebo", sans-serif;
-	--secondary-font: "Roboto", sans-serif;
+  --primary-font: "Heebo", sans-serif;
+  --secondary-font: 'Open Sans', sans-serif;
 	/* --------------------- */
 }
 
@@ -42,4 +41,5 @@
   text-align: center;
   width: 100%;
   background-color: var(--gray-800);
+  font-family: var(--secondary-font);
 }

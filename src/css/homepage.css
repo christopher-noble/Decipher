@@ -1,4 +1,10 @@
-.homeContent {
+header .logo-area {
+    width: 11%;
+    padding-left: 2.5%;
+    padding-top: 2%;
+}
+
+.home-content {
     height: 100%;
     width: 65%;
     margin-top: 10%;
@@ -10,12 +16,12 @@
     color: var(--gray-100);
 }
 
-.homeContent header{
+.home-content {
     margin-bottom: 50px;
     font-family: var(--primary-font);
 }
 
-.homeContent header h1{
+.home-content h4{
     margin-bottom: 50px;
-    font-family: var(--logo-font);
+    font-family: var(--secondary-font);
 }

@@ -11,6 +11,8 @@ import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
 import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
+const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
+
 function UploadForm() {
     const [fullTranscript, setFullTranscript] = useState<string | string[]>('');
     const [fileBody, setFileBody] = useState<string | any>('');
@@ -35,7 +37,7 @@ function UploadForm() {
             formData.append('inputUrlRef', inputUrlRef);
         }
         else {
-            setError("Missing submission");
+            setError(MISSING_SUBMISSION);
         }
 
         if ((inputUrlRef || fileName)) {
@@ -138,7 +140,7 @@ function UploadForm() {
             return 'Please only include one submission';
         }
         else if (!currentFileName && !currentInputUrlRef) {
-            return 'Missing submission';
+            return MISSING_SUBMISSION;
         }
         return null;
     };
