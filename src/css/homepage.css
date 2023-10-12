@@ -25,5 +25,5 @@ header .logo-area {
     margin-bottom: 50px;
     font-size: 200%;
     font-weight: 200;
-    font-family: var(--secondary-font);
+    font-family: var(--tertiary-font);
 }

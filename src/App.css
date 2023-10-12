@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Roboto:wght@500&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Urbanist&display=swap');
 
 :root {
 	/* ------- colors ------- */
@@ -34,6 +35,7 @@
 	/* ------- fonts ------- */
   --primary-font: "Heebo", sans-serif;
   --secondary-font: 'Open Sans', sans-serif;
+  --tertiary-font: 'Urbanist', sans-serif;
 	/* --------------------- */
 }
 
