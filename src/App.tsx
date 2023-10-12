@@ -13,7 +13,7 @@ const App = () => {
         </div>
       </header>
       <div className="home-content">
-        <div className='subheading'>What's your next insight?</div>
+        <div className='subheading'>What are you listening for?</div>
         <UploadForm />
         <footer>
         </footer>
