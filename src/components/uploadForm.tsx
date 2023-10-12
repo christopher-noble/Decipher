@@ -14,9 +14,10 @@ const { v4: uuidv4 } = require('uuid');
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
 let domain : string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
-if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:3000';
-}
+// if (process.env.NODE_ENV === 'development') {
+//     domain = 'http://localhost:3000';
+// }
+
 function UploadForm() {
     const [fullTranscript, setFullTranscript] = useState<string | string[]>('');
     const [fileBody, setFileBody] = useState<string | any>('');
