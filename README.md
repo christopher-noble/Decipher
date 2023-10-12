@@ -15,9 +15,9 @@ Welcome to the Decipher frontend repository. This is the client-side component o
 - **Keyword Tagging**: Input and tag keywords for transcription and timestamping.
 - **Seamless Backend Integration**: Connect seamlessly with the Decipher backend.
 
-## Hosting & Delivery
+## Delivery
 
-- Apache server on AWS EC2 instance
+- Apache web server hosted on EC2
 
 ## Support
 
