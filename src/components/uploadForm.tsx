@@ -5,17 +5,18 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import '../css/uploadForm.css'
 import '../css/keywordTags.css'
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import KeywordTags from './keywordTags';
 import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
 import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
-let domain : string = 'https://d1jd4ljjsprf2p.cloudfront.net';
+const FOOTER_HEIGHT = 1200;
+let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost';
+    domain = 'http://localhost:3000';
 }
 
 function UploadForm() {
@@ -29,6 +30,12 @@ function UploadForm() {
     const [inputUrlRef, setInputUrlRef] = useState<any | null>('');
     const [error, setError] = useState<string | null>(null);
     const [attemptedSubmission, setAttemptedSubmission] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        if (transcriptionComplete) {
+            window.scrollTo(0, document.body.scrollHeight - FOOTER_HEIGHT);
+        }
+    }, [transcriptionComplete]);
 
     const startTranscriptionJob = async () => {
         setIsLoading(true);
@@ -73,7 +80,8 @@ function UploadForm() {
                 })
                 .catch(err => {
                     setIsLoading(false);
-                    setError('Could not connect to the server. Please try again.')
+                    console.log("error: ", err);
+                    setError(err?.response?.data?.message)
                 });
         }
         else {
@@ -173,10 +181,10 @@ function UploadForm() {
             </Row>
             {
                 error && attemptedSubmission ?
-                <Row>
-                    <Form.Label style={errorStyle}>{error}</Form.Label>
-                </Row>
-                : ''
+                    <Row>
+                        <Form.Label style={errorStyle}>{error}</Form.Label>
+                    </Row>
+                    : ''
             }
             <Row>
                 <Col>

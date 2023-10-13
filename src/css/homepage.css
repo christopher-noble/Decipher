@@ -14,11 +14,14 @@ header .logo-area {
     padding: auto;
     background-color: var(--gray-800);
     color: var(--gray-100);
+    flex-grow: 1;
 }
 
 .home-content {
     margin-bottom: 50px;
     font-family: var(--secondary-font);
+    flex-grow: 1;
+    min-height: 100vh;
 }
 
 .subheading{
@@ -26,4 +29,14 @@ header .logo-area {
     font-size: 200%;
     font-weight: 200;
     font-family: var(--tertiary-font);
+}
+
+footer {
+    width: '100%';
+    padding-top: 80px;
+    padding-bottom: 70px;
+    text-align: 'center';
+    background-color: var(--surface-tertiary);
+    color: var(--text-secondary);
+    height: 20vh;
 }

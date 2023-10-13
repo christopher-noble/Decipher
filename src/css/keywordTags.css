@@ -15,7 +15,7 @@
     vertical-align: center;
     font-size: x-large;
     font-weight: 300;
-    background-color: #212529 !important;
+    background-color: var(--surface-secondary) !important;
     vertical-align: middle;
     line-height: normal;
     margin-top: auto;

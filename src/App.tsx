@@ -5,6 +5,7 @@ import UploadForm from './components/uploadForm';
 import './css/homepage.css';
 
 const App = () => {
+  const currentYear = new Date().getFullYear();
   return (
     <div className="App">
       <header>
@@ -15,9 +16,10 @@ const App = () => {
       <div className="home-content">
         <div className='subheading'>What are you listening for?</div>
         <UploadForm />
-        <footer>
-        </footer>
       </div>
+      <footer>
+        © {currentYear} Decipher. All Rights Reserved.
+      </footer>
     </div>
   );
 }
