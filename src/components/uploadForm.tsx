@@ -12,7 +12,7 @@ import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
-let domain : string = 'https://deciphercontent.com';
+let domain : string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.NODE_ENV === 'development') {
     domain = 'http://localhost';
@@ -46,7 +46,7 @@ function UploadForm() {
         }
 
         if ((inputUrlRef || fileName)) {
-            axios.post(`${domain}:3000/transcribe`, formData,
+            axios.post(`${domain}/transcribe`, formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
