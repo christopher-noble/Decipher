@@ -27,16 +27,6 @@
     padding: auto;
 }
 
-.custom-file-input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-    border: none;
-}
-
 .custom-file-label{
     background-color: var(--surface-tertiary) !important;
     color: var(--text-primary) !important;
