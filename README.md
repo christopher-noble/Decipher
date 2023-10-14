@@ -2,6 +2,8 @@
 
 Welcome to the Decipher frontend repository. This is the client-side component of the Decipher app, designed to enhance your audio content consumption experience. Decipher is a powerful transcription service that takes content as input, processes the audio, and returns full audio transcripts along with timestamps for specified keywords or phrases.
 
+[deciphercontent.com](https://deciphercontent.com)
+
 ## Stack
 
 - **TypeScript**
