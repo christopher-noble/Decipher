@@ -1,6 +1,6 @@
 # Decipher - Frontend
 
-Welcome to the Decipher frontend repository. This is the client-side component of the Decipher app, designed to enhance your audio content consumption experience. Decipher is a powerful transcription service that takes content as input, processes the audio, and returns full audio transcripts along with timestamps for specified keywords or phrases.
+Welcome to the client-side component of Decipher. Here, you can effortlessly pinpoint any segment in your favourite podcasts, audiobooks, or web content. Simply input your desired phrases, upload your file, or share a URL, and let Decipher take care of the rest. Our robust transcription service is designed to process audio content, delivering transcripts with precise timestamps for your specified keywords or phrases.
 
 [deciphercontent.com](https://deciphercontent.com)
 
@@ -24,10 +24,6 @@ Welcome to the Decipher frontend repository. This is the client-side component o
 ## Support
 
 If you have any questions, encounter issues, or want to provide feedback, feel free to reach out to us via [email](mailto:chris.noble@oceangold.ca) or create an [issue](https://github.com/christopher-noble/decipher-frontend/issues) in this repository.
-
-## Join the Revolution
-
-Unlock the power of audio content with Decipher. Embrace the future of audio transcription and timestamp generation with our frontend solution. Try it out today!
 
 [Visit Decipher Backend](https://github.com/christopher-noble/decipher-backend)
 
