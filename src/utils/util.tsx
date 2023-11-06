@@ -1,5 +1,5 @@
-export const formatTimestamp = (timestamp: string) => {
-    let totalSeconds = Math.round(parseFloat(timestamp));
+export const formatTimestamp = (timestamp: number) => {
+    let totalSeconds = Math.round(timestamp);
 
     let minutes = Math.floor(totalSeconds / 60);
     let seconds = totalSeconds % 60;

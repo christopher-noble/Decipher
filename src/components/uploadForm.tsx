@@ -5,9 +5,10 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import '../css/uploadForm.css'
 import '../css/keywordTags.css'
-import { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import KeywordTags from './keywordTags';
 import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
+import { TranscriptTimestamp } from '../utils/interfaces';
 import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
@@ -19,17 +20,17 @@ if (process.env.NODE_ENV === 'development') {
     domain = 'http://localhost:3000';
 }
 
-function UploadForm() {
-    const [fullTranscript, setFullTranscript] = useState<string | string[]>('');
-    const [fileBody, setFileBody] = useState<string | any>('');
-    const [fileName, setFileName] = useState<any | null>('');
-    const [isLoading, setIsLoading] = useState<any | null>(false);
-    const [transcriptionComplete, setTranscriptionComplete] = useState<any | null>(false);
-    const [transcriptTimestampMap, setTranscriptTimestampMap] = useState<any | null>([]);
-    const [tags, setTags] = useState<any | null>('');
-    const [inputUrlRef, setInputUrlRef] = useState<any | null>('');
+const UploadForm = () => {
+    const [fullTranscript, setFullTranscript] = useState<string>('');
+    const [fileBody, setFileBody] = useState<File | null>(null);
+    const [fileName, setFileName] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [transcriptionComplete, setTranscriptionComplete] = useState<boolean>(false);
+    const [transcriptTimestampMap, setTranscriptTimestampMap] = useState<TranscriptTimestamp[]>([]);
+    const [tags, setTags] = useState<string[]>([]);
+    const [inputUrlRef, setInputUrlRef] = useState<string>('');
     const [error, setError] = useState<string | null>(null);
-    const [attemptedSubmission, setAttemptedSubmission] = useState<boolean | null>(null);
+    const [attemptedSubmission, setAttemptedSubmission] = useState<boolean>(false);
 
     useEffect(() => {
         if (transcriptionComplete) {
@@ -90,11 +91,11 @@ function UploadForm() {
     };
 
     const displayKeywordTimestampMatch = () => {
-        let result: any[] = [];
+        let result: string[] = [];
 
         for (let tag of tags) {
             let words = tag.split(" ");
-            let timestampsForTag = [];
+            let timestampsForTag : string[] = [];
 
             for (let i = 0; i < transcriptTimestampMap.length; i++) {
                 let matches = true;
@@ -115,38 +116,36 @@ function UploadForm() {
                 result.push(`${tag}: ${timestampsForTag.join(', ')}`);
             }
         }
-
         return result.join('\n');
     }
 
-    const setFileChange = async (event: any) => {
-        setFileBody(event.target.files[0]);
-        setFileName(event.target.files[0].name);
-        setFileName((prevFileName: string) => {
-            const newError = checkSubmissionError(prevFileName, inputUrlRef);
-            setError(newError);
+    const setFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
+        setFileBody(event.target.files![0]);
+        setFileName(event.target.files![0].name);
+        setFileName((prevFileName : string | null) => {
+            const newError = checkSubmissionError(prevFileName || '', inputUrlRef);
+            setError(newError || '');
             return prevFileName;
         });
     }
 
-    const setUrlChange = (event: any) => {
+    const setUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
-        setInputUrlRef(youtubeParser(event?.target.value))
+        setInputUrlRef(youtubeParser(event?.target.value) || '')
         setInputUrlRef((prevInputUrlRef: string) => {
-            const newError = checkSubmissionError(fileName, prevInputUrlRef);
+            const newError = checkSubmissionError(fileName || '', prevInputUrlRef);
             setError(newError);
             return prevInputUrlRef;
         });
     }
 
-    const handleSubmit = (event: any) => {
+    const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         setAttemptedSubmission(true);
         if (!error) {
             startTranscriptionJob();
         }
     }
-
 
     const checkSubmissionError = (currentFileName: string, currentInputUrlRef: string) => {
         if (currentFileName && currentInputUrlRef) {
@@ -157,7 +156,6 @@ function UploadForm() {
         }
         return null;
     };
-
 
     const errorStyle: CSSProperties = { color: 'red', paddingTop: '5px' };
 
@@ -215,7 +213,7 @@ function UploadForm() {
                             </Col>
                             <Col>
                                 <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea2">
-                                    <Form.Control as="textarea" disabled={true} rows={10} onChange={(e) => setTranscriptTimestampMap(e.target.value)} value={displayKeywordTimestampMatch()}></Form.Control>
+                                    <Form.Control as="textarea" disabled={true} rows={10} value={displayKeywordTimestampMatch()}></Form.Control>
                                 </Form.Group>
                             </Col>
                         </Row>
