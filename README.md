@@ -1,6 +1,6 @@
 # Decipher - Frontend
 
-Welcome to the client-side component of Decipher. Here, you can effortlessly pinpoint any segment in your favourite podcasts, audiobooks, or web content. Simply input your desired phrases, upload your file, or share a URL, and let Decipher take care of the rest. Our robust transcription service is designed to process audio content, delivering transcripts with precise timestamps for your specified keywords or phrases.
+Welcome to the client-side repository of Decipher. Here, you can effortlessly pinpoint any segment in your favourite podcasts, audiobooks, or web content. Simply input your desired phrases, upload your file, or share a URL, and let Decipher take care of the rest. Our robust transcription service is designed to process audio content, delivering transcripts with precise timestamps for your specified keywords or phrases.
 
 [deciphercontent.com](https://deciphercontent.com)
 
