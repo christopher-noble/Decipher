@@ -53,6 +53,8 @@ const UploadForm = () => {
             setError(MISSING_SUBMISSION);
         }
 
+        console.log("formData: ", formData);
+
         if ((inputUrlRef || fileName)) {
             axios.post(`${domain}/transcribe`, formData,
                 {
@@ -95,7 +97,7 @@ const UploadForm = () => {
 
         for (let tag of tags) {
             let words = tag.split(" ");
-            let timestampsForTag : string[] = [];
+            let timestampsForTag: string[] = [];
 
             for (let i = 0; i < transcriptTimestampMap.length; i++) {
                 let matches = true;
@@ -122,7 +124,7 @@ const UploadForm = () => {
     const setFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
         setFileBody(event.target.files![0]);
         setFileName(event.target.files![0].name);
-        setFileName((prevFileName : string | null) => {
+        setFileName((prevFileName: string | null) => {
             const newError = checkSubmissionError(prevFileName || '', inputUrlRef);
             setError(newError || '');
             return prevFileName;
