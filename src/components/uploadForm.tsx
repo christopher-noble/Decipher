@@ -54,6 +54,7 @@ const UploadForm = () => {
         }
 
         console.log("formData: ", formData);
+        console.log("inputUrlRef: ", inputUrlRef);
 
         if ((inputUrlRef || fileName)) {
             axios.post(`${domain}/transcribe`, formData,
