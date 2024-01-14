@@ -53,9 +53,6 @@ const UploadForm = () => {
             setError(MISSING_SUBMISSION);
         }
 
-        console.log("formData: ", formData);
-        console.log("inputUrlRef: ", inputUrlRef);
-
         if ((inputUrlRef || fileName)) {
             axios.post(`${domain}/transcribe`, formData,
                 {
@@ -84,7 +81,8 @@ const UploadForm = () => {
                 })
                 .catch(err => {
                     setIsLoading(false);
-                    console.log("error: ", err);
+                    console.log("Request error: ", err);
+                    console.log("Message: ", err?.response?.data?.message);
                     setError(err?.response?.data?.message)
                 });
         }
