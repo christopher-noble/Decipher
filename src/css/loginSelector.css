@@ -1,0 +1,15 @@
+.loginSelectorPosition {
+    position: absolute;
+    display: inline-block;
+    text-align: left;
+    width: auto;
+    margin-left: 35%;
+    margin-top: -2%;
+}
+
+.loginButtons {
+    position: absolute;
+    display: inline-block;
+    text-align: left;
+    width: auto;
+}
