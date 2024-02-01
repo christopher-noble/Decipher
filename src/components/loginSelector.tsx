@@ -4,12 +4,16 @@ import '../css/loginSelector.css';
 const LoginSelector = () => {
     return (
         <div className="login-buttons">
-            <Button className="btn btn-dark submit">
-                Log  In
-            </Button>
-            <Button className="btn btn-dark submit">
-                Sign Up
-            </Button>
+            <div className="login-button">
+                <Button className="btn btn-dark submit">
+                    Log  In
+                </Button>
+            </div>
+            <div className="login-button">
+                <Button className="btn btn-dark submit">
+                    Sign Up
+                </Button>
+            </div>
         </div>
     )
 }

@@ -1,7 +1,9 @@
 header .logo-area {
-    width: 11%;
+    max-width: 150px;
+    min-width: 75px;
     padding-left: 2.5%;
     padding-top: 2%;
+    display: inline-block;
 }
 
 .home-content {
@@ -18,7 +20,7 @@ header .logo-area {
 }
 
 .home-content {
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     font-family: var(--secondary-font);
     flex-grow: 1;
     min-height: 100vh;
@@ -40,3 +42,8 @@ footer {
     color: var(--text-secondary);
     height: 20vh;
 }
+
+/* header {
+    display: inline-block;
+    width: auto;
+} */

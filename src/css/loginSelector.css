@@ -1,15 +1,25 @@
 .loginSelectorPosition {
     position: absolute;
     display: inline-block;
-    text-align: left;
     width: auto;
-    margin-left: 35%;
-    margin-top: -2%;
+    margin-left: 25%;
+    /* margin-top: -2%; */
 }
 
-.loginButtons {
-    position: absolute;
-    display: inline-block;
-    text-align: left;
+.login-buttons {
     width: auto;
+}
+
+.login-button {
+    width: auto;
+    margin-right: 1dvw;
+    display: inline-block;
+}
+
+@media screen and (max-width: 900px) {
+    .loginSelectorPosition {
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

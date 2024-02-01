@@ -14,7 +14,7 @@ const App = () => {
         <div className='logo-area'>
           <a href='/'><img src='./logo-no-background.png' alt='decipher-logo'></img></a>
         </div>
-        <div className="loginSelectorPosition">
+        <div className="login-buttons">
           <LoginSelector />
         </div>
       </header>
