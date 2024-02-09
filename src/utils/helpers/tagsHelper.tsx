@@ -4,12 +4,10 @@ import React, {
     useLayoutEffect,
     useRef,
     useState
-} from 'react'
-import classnames from 'classnames'
+} from 'react';
+import classnames from 'classnames';
+import { TagsHelperProps } from '../interfaces/tagsInterfaces';
 
-export interface CancelProps {
-    cancelProps?: React.SVGProps<SVGSVGElement>
-}
 
 export const Cancel = ({
     cancelProps,
@@ -22,20 +20,7 @@ export const Cancel = ({
     )
 }
 
-export type TagsValue = {
-    values: string[]
-    name?: string
-}
-export interface InputTagsProps {
-    placeholder?: string
-    onTags: (value: TagsValue) => void
-    values?: string[]
-    name?: string
-    elementClassName?: string
-    cancelProps?: React.SVGProps<SVGSVGElement>
-}
-
-export const InputTags = ({
+export const TagsHelper = ({
     placeholder,
     values,
     onTags,
@@ -44,7 +29,7 @@ export const InputTags = ({
     elementClassName,
     cancelProps,
     ...rest
-}: InputTagsProps & HtmlHTMLAttributes<HTMLInputElement>): JSX.Element => {
+}: TagsHelperProps & HtmlHTMLAttributes<HTMLInputElement>): JSX.Element => {
     const [terms, setTerms] = useState<string[]>(values || [])
     const [value, setValue] = useState('')
     const [focusIndex, setFocusIndex] = useState(-1)

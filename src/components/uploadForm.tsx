@@ -3,12 +3,14 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import '../css/uploadForm.css'
-import '../css/keywordTags.css'
+import './styles/uploadFormStyles.css'
+import './styles/tagsStyles.css'
 import { CSSProperties, ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import KeywordTags from './keywordTags';
-import { formatTimestamp, rawCharacters, youtubeParser } from '../utils/util';
-import { TranscriptTimestamp } from '../utils/interfaces';
+import Tags from './tags';
+import { formatTimestamp } from '../utils/helpers/formatting';
+import { rawCharacters } from '../utils/helpers/validation';
+import { youtubeParser } from '../utils/helpers/validation'
+import { TranscriptTimestamp } from '../utils/interfaces/transcriptInterfaces';
 import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
@@ -162,7 +164,7 @@ const UploadForm = () => {
 
     return (
         <>
-            <KeywordTags
+            <Tags
                 tags={tags}
                 setTags={setTags}
             />

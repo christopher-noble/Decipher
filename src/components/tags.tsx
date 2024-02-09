@@ -1,13 +1,13 @@
-import { InputTags } from "../utils/inputTags";
+import { TagsHelper } from "../utils/helpers/tagsHelper";
 import "react-bootstrap-tagsinput/dist/index.css";
-import '../css/keywordTags.css'
+import '../components/styles/tagsStyles.css'
 import { Button, Col, Row } from "react-bootstrap";
 
-const KeywordTags = (props: any) => {
+const Tags = (props: any) => {
   return (
       <Row className="input-group">
         <Col className="input-area">
-          <InputTags
+          <TagsHelper
             values={props.tags}
             onTags={(value) => props.setTags(value.values)}
             className="tag-area"
@@ -31,4 +31,4 @@ const KeywordTags = (props: any) => {
   );
 }
 
-export default KeywordTags;
+export default Tags;
