@@ -19,7 +19,9 @@ const FOOTER_HEIGHT = 1200;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:3000';
+    // domain = 'http://localhost:3000';
+    domain = 'http://127.0.0.1:5000';
+
 }
 
 const UploadForm = () => {
@@ -56,7 +58,7 @@ const UploadForm = () => {
         }
 
         if ((inputUrlRef || fileName)) {
-            axios.post(`${domain}/transcribe`, formData,
+            axios.post(`${domain}/api/transcribe`, formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -177,11 +179,11 @@ const UploadForm = () => {
                 {/**
                  * YouTube input disabled for now as we work out API issue
                  */}
-                {/* <Col>
+                <Col>
                     <Form.Group controlId="formText" className="mb-2 url-input">
-                        <Form.Control className="url-input" onChange={setUrlChange} type="text" disabled={true} placeholder='Or insert YouTube link...' />
+                        <Form.Control className="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
                     </Form.Group>
-                </Col> */}
+                </Col>
             </Row>
             {
                 error && attemptedSubmission ?
