@@ -18,10 +18,11 @@ const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
 const FOOTER_HEIGHT = 1200;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
-if (process.env.NODE_ENV === 'development') {
-    // domain = 'http://localhost:3000';
+if (process.env.ENV === 'development') {
     domain = 'http://127.0.0.1:5000';
-
+}
+else if (process.env.ENV === 'production') {
+    domain = 'http://127.0.0.1:8000';
 }
 
 const UploadForm = () => {
