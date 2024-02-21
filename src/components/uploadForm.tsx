@@ -19,10 +19,7 @@ const FOOTER_HEIGHT = 1200;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.NODE_ENV === 'development') {
-    domain = 'http://127.0.0.1:5000';
-}
-else {
-    domain = 'http://127.0.0.1:8000';
+    domain = 'http://localhost:3000';
 }
 
 const UploadForm = () => {
