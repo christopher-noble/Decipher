@@ -16,11 +16,10 @@ const { v4: uuidv4 } = require('uuid');
 
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
 const FOOTER_HEIGHT = 1200;
-// let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
-let domain: string = 'http://127.0.0.1:8000';
+let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:3000';
+    domain = 'http://localhost:5000';
 }
 
 const UploadForm = () => {
