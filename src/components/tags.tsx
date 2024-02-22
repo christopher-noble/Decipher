@@ -4,6 +4,7 @@ import '../components/styles/tagsStyles.css'
 import { Button, Col, Row } from "react-bootstrap";
 
 const Tags = (props: any) => {
+  //test
   return (
       <Row className="input-group">
         <Col className="input-area">
