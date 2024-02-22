@@ -174,9 +174,6 @@ const UploadForm = () => {
                         <Form.Control className="custom-file-label" type="file" />
                     </Form.Group>
                 </Col>
-                {/**
-                 * YouTube input disabled for now as we work out API issue
-                 */}
                 <Col>
                     <Form.Group controlId="formText" className="mb-2 url-input">
                         <Form.Control className="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
