@@ -24,8 +24,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: List build directory contents
-      run: ls -al build
+    - name: List directory contents
+      run: ls -al
     - name: Deploy Build Artifacts to EC2
       uses: appleboy/scp-action@master
       with:
