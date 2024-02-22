@@ -6,17 +6,6 @@ on:
       - main
 
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Pre-checkout directory listing
-      run: ls -al
-
-    - uses: actions/checkout@v3
-
-    - name: Post-checkout directory listing
-      run: ls -al
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -30,18 +19,28 @@ jobs:
       run: npm install
     - name: Build React app
       run: npm run build
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: build/
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+        path: build/
     - name: List directory contents
-      run: ls -al
+      run: ls -al build
     - name: Deploy Build Artifacts to EC2
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
-        source: "${{ github.workspace }}/build/*"
+        source: "build/*"
         target: "/var/www/html/decipher-frontend/"
