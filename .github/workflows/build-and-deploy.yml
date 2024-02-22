@@ -16,32 +16,32 @@ jobs:
 
     - name: Post-checkout directory listing
       run: ls -al
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@v3
-#     - name: Install Node.js
-#       uses: actions/setup-node@v3
-#       with:
-#         node-version: '20'
-#         cache: 'npm'
-#     - name: Install dependencies
-#       run: npm install
-#     - name: Build React app
-#       run: npm run build
 
-#   deploy:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: List directory contents
-#       run: ls -al
-#     - name: Deploy Build Artifacts to EC2
-#       uses: appleboy/scp-action@master
-#       with:
-#         host: ${{ secrets.EC2_HOST }}
-#         username: ${{ secrets.EC2_USERNAME }}
-#         key: ${{ secrets.EC2_SSH_KEY }}
-#         source: "${{ github.workspace }}/build/*"
-#         target: "/var/www/html/decipher-frontend/"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm install
+    - name: Build React app
+      run: npm run build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: List directory contents
+      run: ls -al
+    - name: Deploy Build Artifacts to EC2
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        source: "${{ github.workspace }}/build/*"
+        target: "/var/www/html/decipher-frontend/"
