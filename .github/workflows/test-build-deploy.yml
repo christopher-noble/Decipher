@@ -39,6 +39,7 @@ jobs:
         record: true
       env:
         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        NODE_ENV: 'production'
       # Runs Cypress tests. 
       # 'wait-on-timeout' specified how many seconds to wait until localhost becomes available
       # record-key value is provided by Cypress cloud. This key is used to record tests through videos and screenshots and make them viewable on our Cypress cloud account.
