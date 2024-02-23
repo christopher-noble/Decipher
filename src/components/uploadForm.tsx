@@ -19,7 +19,7 @@ const FOOTER_HEIGHT = 1200;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.NODE_ENV === 'development') {
-    domain = 'http://localhost:5000';
+    domain = 'http://127.0.0.1:5000';
 }
 
 const UploadForm = () => {
@@ -133,6 +133,8 @@ const UploadForm = () => {
     }
 
     const setUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log("transcriptionComplete: ", transcriptionComplete);
+
         event.preventDefault();
         setInputUrlRef(youtubeParser(event?.target.value) || '')
         setInputUrlRef((prevInputUrlRef: string) => {
@@ -175,7 +177,7 @@ const UploadForm = () => {
                     </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Group controlId="formText" className="mb-2">
+                    <Form.Group controlId="formText" className="mb-2 url-input">
                         <Form.Control className="url-input" name="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
                     </Form.Group>
                 </Col>
@@ -210,12 +212,12 @@ const UploadForm = () => {
                     transcriptionComplete && !isLoading ?
                         <Row className='transcriptionRow'>
                             <Col>
-                                <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea1">
+                                <Form.Group className="mb-2" controlId="controlTextarea1">
                                     <Form.Control as="textarea" disabled={true} rows={10} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
                                 </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Group className="mb-2" controlId="exampleForm.ControlTextarea2">
+                                <Form.Group className="mb-2" controlId="controlTextarea2">
                                     <Form.Control as="textarea" disabled={true} rows={10} value={displayKeywordTimestampMatch()}></Form.Control>
                                 </Form.Group>
                             </Col>

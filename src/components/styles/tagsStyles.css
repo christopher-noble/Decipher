@@ -34,16 +34,23 @@
     background-color: var(--surface-primary);
 }
 
-.input-group {
+.tag-row {
     margin-bottom: 2%;
     padding-right: 0px;
     color: white;
 }
 
+.tag-col {
+    margin-right: -12px !important;
+}
+
 .delete-button-area {
     margin-left: auto;
-    margin-right: 0;
-    padding-left: 0;
+    margin-right: auto;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-left: auto;
+    padding-right: auto;
 }
 
 .delete-button {
@@ -58,20 +65,13 @@
     color: var(--text-primary)
 }
 
-@media (max-width : 800px) {
-    .delete-button-area {
-        margin-top: 4%;
-        margin-bottom: 2%;
-        padding-left: 22vw !important;
-        padding-right: auto !important;
-        width: auto !important;
+@media (max-width : 850px) {
+    .tag-input {
+        min-width: 210px;
+        margin-bottom: 2.5%;
     }
 
-    .delete-button {
-        font-size: x-small;
-        width: auto;
-        background-color: var(--surface-tertiary);
-        border: none;
-        color: var(--text-primary)
+    .tag-area {
+        width: 100%;
     }
 }

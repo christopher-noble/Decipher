@@ -27,9 +27,9 @@
     padding: auto;
 }
 
-.custom-file-label{
+.custom-file-label {
     background-color: var(--surface-tertiary) !important;
-    color: var(--text-primary) !important;
+    color: var(--text-secondary) !important;
     border: none;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .url-input ::placeholder {
-    color: var(--text-tertiary)
+    color: var(--text-secondary) !important;
 }
 
 :focus {
