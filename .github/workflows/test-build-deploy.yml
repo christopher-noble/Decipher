@@ -33,11 +33,12 @@ jobs:
 
       with:
         start: npm start
+        browser: chrome
         wait-on: 'http://localhost:3000'
         wait-on-timeout: 60
         record: true
-        # record-key: ${{ secrets.CYPRESS_RECORD_KEY }} //test
-        record-key: '2bf1f509-9091-4dac-89f4-d5c512bfa2f6'
+      env:
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       # Runs Cypress tests. 
       # 'wait-on-timeout' specified how many seconds to wait until localhost becomes available
       # record-key value is provided by Cypress cloud. This key is used to record tests through videos and screenshots and make them viewable on our Cypress cloud account.
