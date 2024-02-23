@@ -28,14 +28,18 @@ jobs:
     #   # Installs project dependencies including Cypress
 
     - name: Run Cypress Tests
-      uses: cypress-io/github-action@v4
+      uses: cypress-io/github-action@v6
       # Cypress automatically locates tests in /cypress/e2e 
 
       with:
         start: npm start
         wait-on: 'http://localhost:3000'
         wait-on-timeout: 60
-      # Runs Cypress tests. wait-on-timeout specified how many seconds to wait until localhost becomes available
+        record: true
+        record-key: ${{ secrets.CYPRESS_RECORD_KEY }}
+      # Runs Cypress tests. 
+      # 'wait-on-timeout' specified how many seconds to wait until localhost becomes available
+      # record-key value is provided by Cypress cloud. This key is used to record tests through videos and screenshots and make them viewable on our Cypress cloud account.
   build:
     needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
