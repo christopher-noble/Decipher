@@ -175,8 +175,8 @@ const UploadForm = () => {
                     </Form.Group>
                 </Col>
                 <Col>
-                    <Form.Group controlId="formText" className="mb-2 url-input">
-                        <Form.Control className="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
+                    <Form.Group controlId="formText" className="mb-2">
+                        <Form.Control className="url-input" name="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
                     </Form.Group>
                 </Col>
             </Row>
