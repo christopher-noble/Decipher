@@ -1,0 +1,30 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      # Checks out your repository so the job can access it
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+      # Sets up Node.js environment
+
+    - name: Install Dependencies
+      run: npm install
+      # Installs your project dependencies including Cypress
+
+    - name: Run Cypress Tests
+      uses: cypress-io/github-action@v2
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 60
+      # Runs Cypress tests. Adjust `start` and `wait-on` as necessary for your project
