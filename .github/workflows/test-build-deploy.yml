@@ -1,12 +1,44 @@
-name: Build and Deploy to EC2
+name: Test, Build, and Deploy to EC2
 
 on:
   push:
     branches:
-      - main
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      # Checks out decipher-frontend so the job can access it
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+      # Sets up Node.js environment
+
+    - name: Install Dependencies
+      run: npm install
+      # Installs project dependencies including Cypress
+
+    - name: Run Cypress Tests
+      uses: cypress-io/github-action@v4
+      # Cypress automatically locates tests in /cypress/e2e 
+
+      with:
+        start: npm start
+        wait-on: 'http://localhost:3000'
+        wait-on-timeout: 60
+      # Runs Cypress tests. wait-on-timeout specified how many seconds to wait until localhost becomes available
   build:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
