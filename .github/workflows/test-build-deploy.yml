@@ -23,9 +23,9 @@ jobs:
         cache: 'npm'
       # Sets up Node.js environment
 
-    - name: Install Dependencies
-      run: npm install
-      # Installs project dependencies including Cypress
+    # - name: Install Dependencies
+    #   run: npm install
+    #   # Installs project dependencies including Cypress
 
     - name: Run Cypress Tests
       uses: cypress-io/github-action@v4
