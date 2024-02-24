@@ -27,21 +27,26 @@
     padding: auto;
 }
 
-.custom-file-label {
+.custom-file-input {
     background-color: var(--surface-tertiary) !important;
     color: var(--text-secondary) !important;
     border: none;
+}
+
+.url-input-area {
+    background-color: var(--surface-tertiary) !important;
+    border: none;
+    border-radius: 6px;
+}
+
+.url-input-area ::placeholder {
+    color: var(--text-secondary) !important;
 }
 
 .url-input {
     background-color: var(--surface-tertiary) !important;
     color: var(--text-primary) !important;
     border: none;
-    border-radius: 6px;
-}
-
-.url-input ::placeholder {
-    color: var(--text-secondary) !important;
 }
 
 :focus {
@@ -51,4 +56,11 @@
 
 .spinner-col {
     margin-top: 1.5%;
+}
+
+@media screen and (max-width: 400px) {
+    .url-input-area {
+      width: unset;
+      position: unset;
+    }
 }
