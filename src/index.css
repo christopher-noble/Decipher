@@ -10,7 +10,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: var(--surface-tertiary);
+  background-color: var(--surface-secondary);
   transition: background-color 0.5s;
 }
 

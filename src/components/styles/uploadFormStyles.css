@@ -22,7 +22,7 @@
     min-width: 100px;
     min-height: 40px;
     margin-top: 15px;
-    background-color: var(--surface-primary);
+    background-color: var(--surface-secondary);
     border: none;
     padding: auto;
 }

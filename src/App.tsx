@@ -8,9 +8,11 @@ const App = () => {
   const currentYear = new Date().getFullYear();
   return (
     <div className="App">
-      <Homepage/>
+      <Homepage />
       <footer>
-        © {currentYear} Decipher. All Rights Reserved.
+        <div className='footerText'>
+          © {currentYear} Decipher. All Rights Reserved.
+        </div>
       </footer>
     </div>
   );
