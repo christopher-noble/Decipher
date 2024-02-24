@@ -15,12 +15,10 @@ import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
-const FOOTER_HEIGHT = 1200;
+const HEADER_HEIGHT = 130;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
-console.log("process.env: ", process.env);
-
-if (process.env.TESTING_LOCAL_BACKEND === 'development') {
+if (process.env.REACT_APP_IS_TESTING_LOCAL_BACKEND === 'true') {
     domain = 'http://127.0.0.1:5000';
 }
 
@@ -38,7 +36,7 @@ const UploadForm = () => {
 
     useEffect(() => {
         if (transcriptionComplete) {
-            window.scrollTo(0, document.body.scrollHeight - FOOTER_HEIGHT);
+            window.scrollTo(0, HEADER_HEIGHT);
         }
     }, [transcriptionComplete]);
 
@@ -175,12 +173,12 @@ const UploadForm = () => {
             <Row>
                 <Col>
                     <Form.Group controlId="formFile" className="mb-2 custom-file" onChange={setFileChange}>
-                        <Form.Control className="custom-file-input" type="file" />
+                        <Form.Control className="custom-file-input" name="custom-file-input" type="file" />
                     </Form.Group>
                 </Col>
                 <Col>
                     <Form.Group controlId="formText" className="mb-2 url-input-area">
-                        <Form.Control className="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
+                        <Form.Control className="url-input" name="url-input" onChange={setUrlChange} type="text" disabled={false} placeholder='Or insert YouTube link...' />
                     </Form.Group>
                 </Col>
             </Row>
