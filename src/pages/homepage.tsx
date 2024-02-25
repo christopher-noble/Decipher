@@ -2,7 +2,7 @@ import UploadForm from "../components/uploadForm";
 
 const Homepage = () => {
     return (
-        <div>
+        <div className="landing-page">
             <header>
                 <div className='logo-area'>
                     <a href='/'><img src='./logo-no-background.png' alt='decipher-logo'></img></a>

@@ -10,7 +10,7 @@ const App = () => {
     <div className="App">
       <Homepage />
       <footer>
-        <div className='footerText'>
+        <div className='footer-text'>
           © {currentYear} Decipher. All Rights Reserved.
         </div>
       </footer>

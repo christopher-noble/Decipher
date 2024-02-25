@@ -13,6 +13,7 @@
   --border-light: var(--gray-700);
   --border-medium: var(--gray-600);
   --border-heavy: var(--gray-500);
+  --footer-primary: var(--gray-500);
 	--link-color: #14b8a6;
   --white: #fff;
   --black: #000;
@@ -45,6 +46,6 @@
   background-color: var(--surface-primary);
   font-family: var(--secondary-font);
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+  min-height: 100vh;
 }

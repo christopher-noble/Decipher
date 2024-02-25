@@ -170,7 +170,7 @@ const UploadForm = () => {
                 tags={tags}
                 setTags={setTags}
             />
-            <Row>
+            <Row className="content-input-row">
                 <Col>
                     <Form.Group controlId="formFile" className="mb-2 custom-file" onChange={setFileChange}>
                         <Form.Control className="custom-file-input" name="custom-file-input" type="file" />
@@ -189,7 +189,7 @@ const UploadForm = () => {
                     </Row>
                     : ''
             }
-            <Row>
+            <Row className="submit-button-row">
                 <Col>
                     <Form.Group controlId="formButton" className="mb-2">
                         <Button type="submit" className="btn btn-dark submit" onClick={handleSubmit}>
@@ -210,7 +210,7 @@ const UploadForm = () => {
                 }
                 {
                     transcriptionComplete && !isLoading ?
-                        <Row className='transcriptionRow'>
+                        <Row className='transcription-row'>
                             <Col>
                                 <Form.Group className="mb-2" controlId="controlTextarea1">
                                     <Form.Control as="textarea" disabled={true} rows={10} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
