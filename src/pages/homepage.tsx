@@ -1,19 +1,11 @@
-import UploadForm from "../components/uploadForm";
+import './styles/homePageStyles.css';
 
-const Homepage = () => {
+const HomePage = () => {
     return (
         <div className="landing-page">
-            <header>
-                <div className='logo-area'>
-                    <a href='/'><img src='./logo-no-background.png' alt='decipher-logo'></img></a>
-                </div>
-            </header>
-            <div className="home-content">
-                <div className='subheading'>What are you listening for?</div>
-                <UploadForm />
-            </div>
+
         </div>
     )
 }
 
-export default Homepage;
+export default HomePage;
