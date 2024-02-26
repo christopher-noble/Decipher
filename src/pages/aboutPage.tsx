@@ -1,6 +1,8 @@
+import './styles/aboutPageStyles.css'
+
 const AboutPage = () => {
     return (
-        <div>
+        <div className="about-page-wrapper">
             
         </div>
     )
