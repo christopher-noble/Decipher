@@ -78,3 +78,15 @@
   transform: translateY(-20px);
   transition: opacity 600ms, transform 600ms;
 }
+
+footer {
+  height: 35dvh;
+}
+
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--footer-primary)
+}

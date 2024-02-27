@@ -1,14 +1,17 @@
 .transcribe-page-wrapper {
-    height: 100dvh;
+    min-height: 100dvh;
+    background-color: var(--surface-srcondary);
 }
 
 .transcribe-page-content {
+    min-height: 100dvh;
     width: 65%;
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     color: var(--text-primary);
     font-family: var(--secondary-font);
+    background-color: var(--surface-srcondary);
     flex: 1;
 }
 
@@ -19,18 +22,6 @@
     font-size: xx-large;
     font-weight: 200;
     font-family: var(--tertiary-font);
-}
-
-footer {
-    height: 35dvh;
-}
-
-.footer-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--footer-primary)
 }
 
 @media (max-width : 680px) {

@@ -1,6 +1,6 @@
 .home-page-wrapper {
     min-height: 100dvh;
-    animation: fadeInAnimation ease 4s;
+    animation: fadeInAnimation ease 3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
