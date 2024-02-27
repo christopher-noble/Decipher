@@ -1,61 +1,79 @@
-.landing-page {
-    height: 100dvh;
+.home-page-wrapper {
+    min-height: 100dvh;
+    animation: fadeInAnimation ease 4s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
 
-header .logo-area {
-    width: 11%;
-    min-width: 90px;
-    padding-left: 2.5%;
-    padding-top: 2%;
+.home-page-content {
+    min-height: 100%;
 }
 
-.home-content {
-    width: 65%;
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    color: var(--gray-100);
-    font-family: var(--secondary-font);
-    flex: 1;
+.heading {
+    margin-top: 23dvh;
+}
+
+.heading h1 {
+    font-family: var(--primary-font);
+    font-weight: 600;
+    font-size: 85px;
+
+}
+
+.heading-line-1 {
+    margin-bottom: 2dvh;
+    background: -webkit-linear-gradient(rgb(241, 241, 241) 0%, rgb(220, 220, 220) 47%, rgb(149, 149, 149) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.heading-line-2 {
+    background-image: linear-gradient(to right,
+            #462523 0,
+            #a76d17 22%,
+            #ffed91 45%,
+            #f9dc5b 50%,
+            #fce573 55%,
+            #af741b 78%,
+            #462523 100%);
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.heading-line-2 h1 {
+    font-size: 85px;
 }
 
 .subheading {
+    margin-top: 5dvh;
+    color: var(--text-tertiary);
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
-    font-size: xx-large;
     font-weight: 200;
     font-family: var(--tertiary-font);
 }
 
-footer {
-    height: 35dvh;
-}
-
-.footer-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: var(--footer-primary)
-}
-
-@media (max-width : 680px) {
-    .subheading {
-        margin-bottom: 30px;
-        font-size: x-large;
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
     }
-    
-    header .logo-area {
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 2dvh;
-        margin-bottom: 2dvh;
+
+    100% {
+        opacity: 1;
     }
 }
 
-@media (max-width : 450px) {  
-    .subheading {
-        font-size: large;
+@media (max-width: 768px) {
+    .heading {
+        margin-top: 5dvh;
+    }
+
+    .heading h1 {
+        font-size: xx-large;
+    }
+
+    .subheading h4 {
+        font-size: small;
     }
 }

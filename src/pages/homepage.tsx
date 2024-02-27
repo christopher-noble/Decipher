@@ -1,19 +1,26 @@
-import UploadForm from "../components/uploadForm";
+import './styles/homePageStyles.css';
+import HOMEPAGE_INFO from '../data/homepage';
+import HeadingButton from '../components/common/buttons/headingButton';
 
-const Homepage = () => {
+const HomePage = () => {
     return (
-        <div className="landing-page">
-            <header>
-                <div className='logo-area'>
-                    <a href='/'><img src='./logo-no-background.png' alt='decipher-logo'></img></a>
+        <div className="home-page-wrapper">
+            <div className="home-page-content">
+                <div className='heading'>
+                    <div className='heading-line-1'>
+                        <h1>{HOMEPAGE_INFO.main.headingLine1}</h1>
+                    </div>
+                    <div className='heading-line-2'>
+                        <h1>{HOMEPAGE_INFO.main.headingLine2}</h1>
+                    </div>
                 </div>
-            </header>
-            <div className="home-content">
-                <div className='subheading'>What are you listening for?</div>
-                <UploadForm />
+                <div className='subheading'>
+                    <h4>{HOMEPAGE_INFO.main.subheading}</h4>
+                </div>
+                <HeadingButton />
             </div>
         </div>
     )
 }
 
-export default Homepage;
+export default HomePage;
