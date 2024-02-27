@@ -34,11 +34,11 @@ const TranscribeForm = () => {
     const [error, setError] = useState<string | null>(null);
     const [attemptedSubmission, setAttemptedSubmission] = useState<boolean>(false);
 
-    useEffect(() => {
-        if (transcriptionComplete) {
-            window.scrollTo(0, HEADER_HEIGHT);
-        }
-    }, [transcriptionComplete]);
+    // useEffect(() => {
+    //     if (transcriptionComplete) {
+    //         window.scrollTo(0, HEADER_HEIGHT);
+    //     }
+    // }, [transcriptionComplete]);
 
     const startTranscriptionJob = async () => {
         setIsLoading(true);
@@ -198,7 +198,7 @@ const TranscribeForm = () => {
                     </Form.Group>
                 </Col>
             </Row>
-            <Row>
+            <Row className='spinner-row'>
                 {
                     isLoading ?
                         <Col className='spinner-col' xs={12}>
