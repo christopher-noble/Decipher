@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Heebo:wght@300&family=Roboto:wght@500&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Urbanist&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,500;1,500&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
 	/* ------- colors ------- */
@@ -35,7 +36,7 @@
 	/* ---------------------- */
 
 	/* ------- fonts ------- */
-  --primary-font: "Heebo", sans-serif;
+  --primary-font: "Inter Tight", sans-serif;
   --secondary-font: 'Open Sans', sans-serif;
   --tertiary-font: 'Urbanist', sans-serif;
 	/* --------------------- */
@@ -51,9 +52,9 @@
   min-height: 100vh;
 }
 
-.landing-page {
+/* .home-page-wrapper {
   height: 100dvh;
-}
+} */
 
 .logo-area {
   width: 11%;
