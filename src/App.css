@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,500;1,500&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-	/* ------- colors ------- */
+  /* ------- colors ------- */
   --text-primary: var(--gray-100);
   --text-secondary: var(--gray-300);
   --text-tertiary: var(--gray-500);
@@ -15,7 +15,7 @@
   --border-medium: var(--gray-600);
   --border-heavy: var(--gray-500);
   --footer-primary: var(--gray-500);
-	--link-color: #a8e3d8;
+  --link-color: #a8e3d8;
   --hover-color: #8ff7e4;
   --white: #fff;
   --black: #000;
@@ -33,13 +33,13 @@
   --gizmo-gray-500: #999;
   --gizmo-gray-600: #666;
   --gizmo-gray-950: #0f0f0f;
-	/* ---------------------- */
+  /* ---------------------- */
 
-	/* ------- fonts ------- */
+  /* ------- fonts ------- */
   --primary-font: "Inter Tight", sans-serif;
   --secondary-font: 'Open Sans', sans-serif;
   --tertiary-font: 'Urbanist', sans-serif;
-	/* --------------------- */
+  /* --------------------- */
 }
 
 .App {
@@ -52,12 +52,29 @@
   min-height: 100vh;
 }
 
-/* .home-page-wrapper {
-  height: 100dvh;
-} */
-
 .logo-area {
   width: 11%;
   min-width: 90px;
   padding-left: 2.5%;
+}
+
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms, transform 600ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 600ms, transform 600ms;
 }

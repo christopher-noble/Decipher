@@ -1,0 +1,28 @@
+.heading-button-area {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.heading-button {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: auto;
+    font-weight: bolder;
+    font-family: var(--text-primary);
+    background-color: var(--surface-secondary);
+    color: var(--text-primary);
+    border: none;
+    margin-bottom: 10px;
+}
+
+.heading-button:hover {
+    background-color: var(--surface-tertiary);
+    color: var(--text-primary);
+}
+
+.heading-button:active {
+    background-color: var(--surface-secondary) !important;
+}

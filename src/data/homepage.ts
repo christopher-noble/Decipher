@@ -1,8 +1,8 @@
 const HOMEPAGE_INFO = {
 	main: {
-		headingLine1: "Premier Segment Discovery for",
-        headingLine2: "Podcasts",
-		subheading: "Revolutionize Your Podcast Experience: Customizable, Real-Time Search for Every Phrase or Keyword",
+		headingLine1: `Premier Segment Discovery for`,
+        headingLine2: "Audio Content",
+		subheading: "Revolutionize your audio experience with customizable, real-time searching for any phrase or segment",
 	},
 };
 

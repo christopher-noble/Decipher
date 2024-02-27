@@ -12,7 +12,7 @@
     flex: 1;
 }
 
-.subheading {
+.transcribe-heading {
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
@@ -34,7 +34,7 @@ footer {
 }
 
 @media (max-width : 680px) {
-    .subheading {
+    .transcribe-heading {
         margin-bottom: 30px;
         font-size: x-large;
     }
@@ -48,7 +48,7 @@ footer {
 }
 
 @media (max-width : 450px) {  
-    .subheading {
+    .transcribe-heading {
         font-size: large;
     }
 }
