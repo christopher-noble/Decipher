@@ -8,7 +8,6 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import AboutPage from './pages/aboutPage';
 import NavBar from './components/navBar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import FadeTransition from './pages/fadeTransition';
 
 const App = () => {
   const location = useLocation(); // Get the current location object

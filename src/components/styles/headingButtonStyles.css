@@ -5,13 +5,13 @@
 }
 
 .heading-button {
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 2.5%;
     padding-right: 2.5%;
     width: auto;
     font-weight: bolder;
-    font-family: var(--text-primary);
+    font-family: var(--text-secondary) !important;
     background-color: var(--surface-secondary);
     color: var(--text-primary);
     border: none;

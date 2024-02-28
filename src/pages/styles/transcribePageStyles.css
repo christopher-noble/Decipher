@@ -10,7 +10,6 @@
     margin-left: auto;
     margin-right: auto;
     color: var(--text-primary);
-    font-family: var(--secondary-font);
     background-color: var(--surface-srcondary);
     flex: 1;
 }
@@ -19,9 +18,15 @@
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
-    font-size: xx-large;
-    font-weight: 200;
-    font-family: var(--tertiary-font);
+    font-size: 40px;
+    font-weight: 500;
+    font-family: var(--secondary-font);
+
+    /* ------- Gradient Header Style ------- */
+    background: var(--header-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* --------------------- */
 }
 
 @media (max-width : 680px) {
@@ -29,7 +34,7 @@
         margin-bottom: 30px;
         font-size: x-large;
     }
-    
+
     header .logo-area {
         margin-left: auto;
         margin-right: auto;
@@ -38,7 +43,7 @@
     }
 }
 
-@media (max-width : 450px) {  
+@media (max-width : 450px) {
     .transcribe-heading {
         font-size: large;
     }
