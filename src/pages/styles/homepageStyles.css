@@ -21,9 +21,11 @@
 }
 
 .heading-line-1 {
-    background: -webkit-linear-gradient(rgb(241, 241, 241) 0%, rgb(220, 220, 220) 47%, rgb(149, 149, 149) 100%);
+    /* ------- Gradient Header Style ------- */
+    background: var(--header-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    /* --------------------- */
 }
 
 .heading-line-2 {

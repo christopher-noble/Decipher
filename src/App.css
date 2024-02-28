@@ -14,6 +14,7 @@
   --border-medium: var(--gray-600);
   --border-heavy: var(--gray-500);
   --footer-primary: var(--gray-500);
+  --header-primary: -webkit-linear-gradient(rgb(241, 241, 241) 0%, rgb(220, 220, 220) 47%, rgb(149, 149, 149) 100%);
   --link-color: #a8e3d8;
   --hover-color: #8ff7e4;
   --white: #fff;
@@ -39,12 +40,14 @@
   --secondary-font: 'Urbanist', sans-serif;
   --tertiary-font: 'Roboto', sans-serif;
   /* --------------------- */
+
+  background-color: var(--surface-secondary);
 }
 
 .App {
   text-align: center;
   width: 100%;
-  background-color: var(--surface-primary);
+  background-color: var(--surface-primary) !important;
   font-family: var(--primary-font);
   display: flex;
   flex-direction: column;
@@ -80,6 +83,8 @@
 
 footer {
   height: 35dvh;
+  overflow: auto;
+  background-color: var(--surface-secondary);
 }
 
 .footer-text {
