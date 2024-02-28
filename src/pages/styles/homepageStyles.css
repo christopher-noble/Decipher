@@ -49,6 +49,8 @@
     margin-right: auto;
     font-weight: 200;
     font-family: var(--secondary-font);
+    width: 80%;
+
 }
 
 @keyframes fadeInAnimation {

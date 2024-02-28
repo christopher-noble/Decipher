@@ -13,6 +13,14 @@
     margin-right: auto;
 }
 
+#controlTextArea1, #controlTextArea2 {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: none;
+    resize: none;
+}
+
+
 .submit-button-row {
     margin-left: auto;
     margin-right: auto;

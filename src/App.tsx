@@ -5,7 +5,7 @@ import './pages/styles/transcribePageStyles.css';
 import HomePage from './pages/homepage';
 import TranscribePage from './pages/transcribePage';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import AboutPage from './pages/aboutPage';
+import LibraryPage from './pages/libraryPage';
 import NavBar from './components/navBar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -20,9 +20,9 @@ const App = () => {
       </header>
       <TransitionGroup>
         <CSSTransition key={location.pathname} timeout={300} classNames="fade">
-          <Routes location={location}> 
+          <Routes location={location}>
             <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
+            <Route path="/library" element={<LibraryPage />} />
             <Route path="/transcribe" element={<TranscribePage />} />
           </Routes>
         </CSSTransition>

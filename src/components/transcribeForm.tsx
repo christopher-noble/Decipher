@@ -16,6 +16,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
 const HEADER_HEIGHT = 130;
+const RESULTING_ROWS = 20;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.REACT_APP_IS_TESTING_LOCAL_BACKEND === 'true') {
@@ -116,7 +117,7 @@ const TranscribeForm = () => {
             }
 
             if (timestampsForTag.length) {
-                result.push(`${tag}: ${timestampsForTag.join(', ')}`);
+                result.push(`${tag} - ${timestampsForTag.join(', ')}`);
             }
         }
         return result.join('\n');
@@ -212,13 +213,13 @@ const TranscribeForm = () => {
                     transcriptionComplete && !isLoading ?
                         <Row className='transcription-row'>
                             <Col>
-                                <Form.Group className="mb-2" controlId="controlTextarea1">
-                                    <Form.Control as="textarea" disabled={true} rows={10} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
+                                <Form.Group className="mb-2" controlId="controlTextArea1">
+                                    <Form.Control className='transcription-output' as="textarea" disabled={true} rows={RESULTING_ROWS} onChange={(e) => setFullTranscript(e.target.value)} value={fullTranscript}></Form.Control>
                                 </Form.Group>
                             </Col>
                             <Col>
-                                <Form.Group className="mb-2" controlId="controlTextarea2">
-                                    <Form.Control as="textarea" disabled={true} rows={10} value={displayKeywordTimestampMatch()}></Form.Control>
+                                <Form.Group className="mb-2" controlId="controlTextArea2">
+                                    <Form.Control className='transcription-output'as="textarea" disabled={true} rows={RESULTING_ROWS} value={displayKeywordTimestampMatch()}></Form.Control>
                                 </Form.Group>
                             </Col>
                         </Row>

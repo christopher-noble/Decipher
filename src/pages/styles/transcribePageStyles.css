@@ -1,34 +1,3 @@
-.transcribe-page-wrapper {
-    min-height: 100dvh;
-    background-color: var(--surface-srcondary);
-}
-
-.transcribe-page-content {
-    min-height: 100dvh;
-    width: 65%;
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    color: var(--text-primary);
-    background-color: var(--surface-srcondary);
-    flex: 1;
-}
-
-.transcribe-heading {
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 40px;
-    font-weight: 500;
-    font-family: var(--secondary-font);
-
-    /* ------- Gradient Header Style ------- */
-    background: var(--header-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* --------------------- */
-}
-
 @media (max-width : 680px) {
     .transcribe-heading {
         margin-bottom: 30px;
