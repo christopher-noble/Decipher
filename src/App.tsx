@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './pages/styles/transcribePageStyles.css';
-import HomePage from './pages/homePage';
+import HomePage from './pages/homepage';
 import TranscribePage from './pages/transcribePage';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import AboutPage from './pages/aboutPage';
