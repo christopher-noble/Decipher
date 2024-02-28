@@ -14,14 +14,13 @@
 }
 
 .heading h1 {
-    font-family: var(--primary-font);
     font-weight: 600;
-    font-size: 85px;
-
+    font-size: 80px;
+    padding-bottom: 10px;
+    font-family: var(--secondary-font);
 }
 
 .heading-line-1 {
-    margin-bottom: 2dvh;
     background: -webkit-linear-gradient(rgb(241, 241, 241) 0%, rgb(220, 220, 220) 47%, rgb(149, 149, 149) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -40,10 +39,6 @@
     -webkit-background-clip: text;
 }
 
-.heading-line-2 h1 {
-    font-size: 85px;
-}
-
 .subheading {
     margin-top: 5dvh;
     color: var(--text-tertiary);
@@ -51,7 +46,7 @@
     margin-left: auto;
     margin-right: auto;
     font-weight: 200;
-    font-family: var(--tertiary-font);
+    font-family: var(--secondary-font);
 }
 
 @keyframes fadeInAnimation {

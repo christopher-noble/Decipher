@@ -11,7 +11,7 @@
     padding-right: 2.5%;
     width: auto;
     font-weight: bolder;
-    font-family: var(--text-primary);
+    font-family: var(--text-secondary) !important;
     background-color: var(--surface-secondary);
     color: var(--text-primary);
     border: none;

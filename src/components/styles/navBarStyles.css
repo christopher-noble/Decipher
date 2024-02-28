@@ -1,7 +1,6 @@
 .navBar {
     background-color: transparent !important;
     border: none !important;
-    font-family: var(--secondary-font);
     color: var(--text-secondary) !important;
 }
 
