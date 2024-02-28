@@ -1,4 +1,4 @@
-import './styles/homePageStyles.css';
+import './styles/homepageStyles.css';
 import HOMEPAGE_INFO from '../data/homepage';
 import HeadingButton from '../components/common/buttons/headingButton';
 
