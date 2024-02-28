@@ -10,7 +10,7 @@ import NavBar from './components/navBar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const App = () => {
-  const location = useLocation(); // Get the current location object
+  const location = useLocation();
 
   const currentYear = new Date().getFullYear();
   return (
@@ -20,11 +20,10 @@ const App = () => {
       </header>
       <TransitionGroup>
         <CSSTransition key={location.pathname} timeout={300} classNames="fade">
-          <Routes location={location}> {/* Pass location to Routes */}
+          <Routes location={location}> 
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/transcribe" element={<TranscribePage />} />
-            {/* Add more routes as needed */}
           </Routes>
         </CSSTransition>
       </TransitionGroup>
