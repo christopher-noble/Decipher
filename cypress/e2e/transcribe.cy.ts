@@ -5,6 +5,6 @@ describe('template spec', () => {
     cy.get('.tag-area').type('jamie pull that up');
     cy.get('[name=url-input]').type('https://www.youtube.com/watch?v=SRgct4c5T5U');
     cy.get('button.submit').click();
-    cy.get('#controlTextarea1', { timeout: 25000 }).should('be.disabled'); // give 25 seconds for the transcription to complete
+    cy.get('#controlTextArea1', { timeout: 25000 }).should('be.disabled'); // give 25 seconds for the transcription to complete
   })
 })
