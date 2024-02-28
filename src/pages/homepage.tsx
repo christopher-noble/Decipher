@@ -1,5 +1,5 @@
 import './styles/homePageStyles.css';
-import HOMEPAGE_INFO from '../data/homepage';
+import HOMEPAGE_INFO from '../data/homePage';
 import HeadingButton from '../components/common/buttons/headingButton';
 
 const HomePage = () => {
