@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import './styles/transcribeFormStyles.css'
 import './styles/tagsStyles.css'
-import { CSSProperties, ChangeEvent, FormEvent, useState } from 'react';
+import { CSSProperties, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Tags from './tags';
 import { formatTimestamp } from '../utils/helpers/formatting';
 import { rawCharacters } from '../utils/helpers/validation';
@@ -15,7 +15,7 @@ import Spinner from 'react-bootstrap/Spinner';
 const { v4: uuidv4 } = require('uuid');
 
 const MISSING_SUBMISSION = 'Invalid input. Please include a submission';
-// const HEADER_HEIGHT = 130;
+const HEADER_HEIGHT = 130;
 let domain: string = 'https://d1jd4ljjsprf2p.cloudfront.net';
 
 if (process.env.REACT_APP_IS_TESTING_LOCAL_BACKEND === 'true') {
@@ -34,11 +34,11 @@ const TranscribeForm = () => {
     const [error, setError] = useState<string | null>(null);
     const [attemptedSubmission, setAttemptedSubmission] = useState<boolean>(false);
 
-    // useEffect(() => {
-    //     if (transcriptionComplete) {
-    //         window.scrollTo(0, HEADER_HEIGHT);
-    //     }
-    // }, [transcriptionComplete]);
+    useEffect(() => {
+        if (transcriptionComplete) {
+            window.scrollTo(0, HEADER_HEIGHT);
+        }
+    }, [transcriptionComplete]);
 
     const startTranscriptionJob = async () => {
         setIsLoading(true);
