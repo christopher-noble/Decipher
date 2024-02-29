@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const HeadingButton = () => {
     return (
         <div className="heading-button-area">
-            <Link to="/transcribe">
+            <Link to="/upload">
                 <Button className="heading-button rounded-pill" variant="light">Try For Free</Button>{' '}
             </Link>
         </div>

@@ -1,14 +1,14 @@
-import TranscribeForm from "../components/transcribeForm";
+import UploadForm from "../components/uploadForm";
 
-const TranscribePage = () => {
+const UploadPage = () => {
     return (
         <div className="page-wrapper">
             <div className="page-content">
                 <div className='page-heading'>What are you listening for?</div>
-                <TranscribeForm />
+                <UploadForm />
             </div>
         </div>
     )
 }
 
-export default TranscribePage;
+export default UploadPage;

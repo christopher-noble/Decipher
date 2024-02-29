@@ -1,7 +1,7 @@
 describe('template spec', () => {
   it('passes', () => {
     cy.visit('http://localhost:3000');
-    cy.get('.nav-link-transcribe').click();
+    cy.get('.nav-link-upload').click();
     cy.get('.tag-area').type('jamie pull that up');
     cy.get('[name=url-input]').type('https://www.youtube.com/watch?v=SRgct4c5T5U');
     cy.get('button.submit').click();

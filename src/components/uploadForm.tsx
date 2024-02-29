@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import './styles/transcribeFormStyles.css'
+import './styles/uploadFormStyles.css'
 import './styles/tagsStyles.css'
 import { CSSProperties, ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Tags from './tags';
@@ -23,7 +23,7 @@ if (process.env.REACT_APP_IS_TESTING_LOCAL_BACKEND === 'true') {
     domain = 'http://127.0.0.1:5000';
 }
 
-const TranscribeForm = () => {
+const UploadForm = () => {
     const [fullTranscript, setFullTranscript] = useState<string>('');
     const [fileBody, setFileBody] = useState<File | null>(null);
     const [fileName, setFileName] = useState<string | null>(null);
@@ -230,4 +230,4 @@ const TranscribeForm = () => {
     );
 }
 
-export default TranscribeForm;
+export default UploadForm;

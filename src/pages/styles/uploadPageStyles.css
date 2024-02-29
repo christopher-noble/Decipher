@@ -1,5 +1,5 @@
 @media (max-width : 680px) {
-    .transcribe-heading {
+    .upload-heading {
         margin-bottom: 30px;
         font-size: x-large;
     }
@@ -13,7 +13,7 @@
 }
 
 @media (max-width : 450px) {
-    .transcribe-heading {
+    .upload-heading {
         font-size: large;
     }
 }

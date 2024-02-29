@@ -19,7 +19,7 @@ const NavBar = () => {
                     <Nav className="me-auto">
                         <Nav.Link as={NavLink} className='nav-link-home' to="/">Home</Nav.Link>
                         <Nav.Link as={NavLink} className='nav-link-library' to="/library">Library</Nav.Link>
-                        <Nav.Link as={NavLink} className='nav-link-transcribe' to="/transcribe">Transcribe</Nav.Link>
+                        <Nav.Link as={NavLink} className='nav-link-upload' to="/upload">Upload</Nav.Link>
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">

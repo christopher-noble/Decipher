@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './pages/styles/transcribePageStyles.css';
+import './pages/styles/uploadPageStyles.css';
 import HomePage from './pages/homepage';
-import TranscribePage from './pages/transcribePage';
+import UploadPage from './pages/uploadPage';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import LibraryPage from './pages/libraryPage';
 import NavBar from './components/navBar';
@@ -23,7 +23,7 @@ const App = () => {
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
             <Route path="/library" element={<LibraryPage />} />
-            <Route path="/transcribe" element={<TranscribePage />} />
+            <Route path="/upload" element={<UploadPage />} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>
