@@ -167,7 +167,7 @@ const UploadForm = () => {
 
     return (
         <>
-            <Tags
+            {/* <Tags
                 tags={tags}
                 setTags={setTags}
             />
@@ -225,7 +225,8 @@ const UploadForm = () => {
                         </Row>
                         : ''
                 }
-            </Row>
+            </Row> */}
+            <div className='coming-soon'>Coming Soon...</div>
         </>
     );
 }
